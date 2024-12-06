@@ -20,5 +20,4 @@ from blog import views as blog_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('teamapp.urls')),
 ]
