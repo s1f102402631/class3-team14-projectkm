@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.http import Http404, JsonResponse
 from django.shortcuts import render, redirect
 from django.utils import timezone
+from teamapp.models import Article
 
 
 # Create your views here.
