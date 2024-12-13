@@ -20,7 +20,6 @@ from . import views
 urlpatterns = [
     path('', views.home_screen, name='home_screen'),
     path('<int:article_id>/update', views.update, name='update'),
-    path('redirect', views.redirect_test, name='redirect_views'),
     path('<int:article_id>/', views.detail, name='detail'),
     path('<int:article_id>/delete', views.delete, name='delete'),
     path('<int:article_id>/update', views.update, name='update'),
