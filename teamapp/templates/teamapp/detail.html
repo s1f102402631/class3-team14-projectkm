@@ -11,7 +11,6 @@
     <div>
       {{ article.body | linebreaksbr }}
     </div>
-
     <h2>Comments</h2>
     <form action="{% url 'detail' article.id %}" method="post">
       {% csrf_token %}
