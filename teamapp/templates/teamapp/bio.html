@@ -1,11 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>プロフィール</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
+        .profile-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 30px;
+            text-align: center;
+        }
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            filter: grayscale(100%);
+        }
+        .interests {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .interest-tag {
+            background-color: #e0e0e0;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .anonymized {
+            color: #666;
+        }
+    </style>
 </head>
 <body>
-    <h1>これはプロフィール画面です。</h1>
+    <div class="profile-container">
+        <img src="/api/placeholder/200/200" alt="プロフィール画像" class="profile-image">
+        
+        <h1 class="anonymized">{{ acoount.name }}</h1>
+        <p class="anonymized">{{acoount.grade}}</p>
+        
+        <h2>自己紹介</h2>
+        <p>
+            例）テクノロジーと創造性を融合させることに夢中な
+            大学生です。プログラミングやデザイン、音楽など
+            多様な興味を持っています。常に新しいことを
+            学ぶことに情熱を注いでいます。
+            {{acoount.detail}}
+        </p>
+        
+        <h2>パーソナリティ</h2>
+        <p>
+            MBTI: {{acoount.mbti}}<br>
+            エニアグラム: タイプ 5<br>
+            好奇心旺盛で分析的、独創的な思考を大切にしています。
+        </p>
+        
+        <h2>趣味・関心</h2>
+        <div class="interests">
+            <span class="interest-tag">プログラミング</span>
+            <span class="interest-tag">ゲーム制作</span>
+            <span class="interest-tag">映画鑑賞</span>
+            <span class="interest-tag">電子音楽</span>
+            <span class="interest-tag">ボードゲーム</span>
+            <span class="interest-tag">写真撮影</span>
+        </div>
+        
+        <h2>好きなこと</h2>
+        <p>
+            例）コーディング / 新しいアプリやゲームの開発 / 
+            Spotifyで音楽探索 / 友人とのボードゲーム / 
+            YouTubeでの学習と情報収集
+            {{acoount.like}}
+        </p>
+    </div>
 </body>
 </html>
