@@ -3,12 +3,9 @@ from django.http import HttpResponse
 from django.http import Http404, JsonResponse
 from django.shortcuts import render, redirect
 from django.utils import timezone
-
+from teamapp.models import Article, Comment
 
 # Create your views here.
-def home_screen(request):
-    return render(request, "teamapp/home_screen.html")
-
 def index(request):
     if request.method == 'POST':
         article = Article(title=request.POST['title'], body=request.POST['text'])
@@ -65,3 +62,26 @@ def delete(request, article_id):
         raise Http404('Article does not exist')
     article.delete()
     return redirect(index)
+
+def like(request, article_id):
+    try:
+        article = Article.objects.get(pk=article_id)
+        article.like += 1
+        article.save()
+    except Article.DoesNotExist:
+        raise Http404("Article does not exist")
+
+    return redirect(detail, article_id)
+
+def api_like(request, article_id):
+    try:
+        article = Article.objects.get(pk=article_id)
+        article.like += 1
+        article.save()
+    except Article.DoesNotExist:
+        raise Http404("Article does not exist")
+    result = {
+        'id': article_id,
+        'like': article.like
+    }
+    return JsonResponse(result)
