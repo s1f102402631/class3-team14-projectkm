@@ -23,10 +23,10 @@
       <div>
         <button type="submit">Submit</button>
       </div>
+      
     </form>
 
     <br>
-    <p>kkkakaa</p>
     <div>
       <a href="{% url 'index' %}?sort=data">最新</a>
       <a href="{% url 'index' %}?sort=like">いいね順</a>
@@ -50,7 +50,8 @@
     {% else %}
     <p>No article.</p>
     {% endif %}    
-
-
+    <div style="text-align: center;">
+    <img src="{% static 'teamapp/images/img_20241213_161452.jpg' %}" alt="Uploaded Image" width: 500px; height= 500px;>
+    </div>
   </body>
 </html>
