@@ -3,6 +3,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <title>ホーム</title>
     <script type="text/javascript" src="{% static 'teamapp/js/sistem.js' %}" ></script>
     <style type="text/css"></style>
     <link rel="stylesheet" href="{% static 'teamapp/home_screen.css' %}">
@@ -38,7 +39,7 @@
         <h2><a href="{% url 'detail' article.id %}">{{article.title}}</a><h2>
         <small>[{{ article.posted_at }}]</small>
         <div>
-          <a onclick="like({{article.id}});">
+          <a href="#"onclick="like({{article.id}});">
             Like: <span id="like{{article.id}}">{{ article.like }}</span>
           </a>
         </div>
