@@ -85,3 +85,6 @@ def api_like(request, article_id):
         'like': article.like
     }
     return JsonResponse(result)
+
+def bio(request):
+    return render(request, "teamapp/bio.html")
