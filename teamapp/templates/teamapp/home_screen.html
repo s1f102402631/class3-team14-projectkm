@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <meta charset="UTF-8">
     <title>ホーム</title>
@@ -26,6 +26,8 @@
       </div>
       
     </form>
+
+    <a href="{% url 'title' %}?next={{ 'index' }}">ログイン</a>
 
     <br>
     <div>

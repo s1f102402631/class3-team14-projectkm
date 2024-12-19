@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>Login</title>
+    </head>
+    <body>
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    
+        <form method="post" action="{% url 'title' %}">
+            {% csrf_token %}
+            <label for="username">ユーザー名:</label>
+            <input type="text" id="username" name="username">
+            <br>
+            <label for="userpassword">パスワード:</label>
+            <input type="password" id="userpassword" name="password">
+            <br>
+            
+            <input type="submit" value="ログイン">
+            <input type="hidden" name="next" value="{{ next }}"> 
+        </form>
+        <a href="{% url 'create' %}">アカウント作成</a>
+    </body>
+</html>
