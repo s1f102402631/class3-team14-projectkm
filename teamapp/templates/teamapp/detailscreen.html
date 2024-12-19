@@ -6,12 +6,11 @@
     <title>ホーム</title>
     <script type="text/javascript" src="{% static 'teamapp/js/sistem.js' %}" ></script>
     <style type="text/css"></style>
-    <link rel="stylesheet" href="{% static 'teamapp/home_screen.css' %}">
   </head>
   <body>
     <h1>Django Sample Application</h1>
     <p>You can submit articles from the following form.</p>
-    <form action="{% url 'index' %}" method="post">
+    <form action="{% url 'detailscreen' %}" method="post">
       {% csrf_token %}
       <div>
         <label for="titleInput">Title</label><br>
@@ -29,8 +28,8 @@
 
     <br>
     <div>
-      <a href="{% url 'index' %}?sort=data">最新</a>
-      <a href="{% url 'index' %}?sort=like">いいね順</a>
+      <a href="{% url 'detailscreen' %}?sort=data">最新</a>
+      <a href="{% url 'detailscreen' %}?sort=like">いいね順</a>
     </div>
 
     {% if articles %}
@@ -52,19 +51,10 @@
     <p>No article.</p>
     {% endif %}    
     <div style="text-align: center;">
-    <img src="{% static 'teamapp/images/img_20241213_161452.jpg' %}" alt="Uploaded Image" width: 500px; height= 500px;>
+
     </div>
     
         
-    <div class="app">
-      <div class="header">ヘッダー</div>
-      <div class="main">
-        <div class="sidebar">サイドバー   <a href="{% url 'bio' %}">プロフィール</a><br><a href="{% url 'detailscreen' %}">投稿画面</a></div>
-        <div class="content">
-          <div class="flex-content">コンテンツ1</div>
-          <div class="fixed-content">コンテンツ2</div>
-        </div>
-      </div>
-    </div>
+
   </body>
 </html>

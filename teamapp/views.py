@@ -88,3 +88,6 @@ def api_like(request, article_id):
 
 def bio(request):
     return render(request, "teamapp/bio.html")
+
+def detailscreen(request):
+    return render(request, 'teamapp/detailscreen.html')

@@ -9,5 +9,6 @@ urlpatterns = [
     path('<int:article_id>/update', views.update, name='update'),
 	path('<int:article_id>/like', views.like, name='like'),
 	path('api/articles/<int:article_id>/like', views.api_like),
-    path('bio', views.bio, name='bio')
+    path('bio', views.bio, name='bio'),
+    path('detailscreen', views.detailscreen, name='detailscreen'),
 ]
