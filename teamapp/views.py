@@ -28,6 +28,25 @@ def index(request):
     }
     return render(request, 'teamapp/home_screen.html', context)
 
+def detailscreen(request):
+    if request.method == 'POST':
+        article = Article(title=request.POST['title'], body=request.POST['text'])
+        article.save()
+        return redirect(detail, article.id)
+
+    if ('sort' in request.GET):
+        if request.GET['sort'] == 'like':
+            articles = Article.objects.order_by('-like')
+        else:
+            articles = Article.objects.order_by('-posted_at')
+    else:
+        articles = Article.objects.order_by('-posted_at')
+
+    context = {
+        "articles": articles,
+    }
+    return render(request, 'teamapp/detailscreen.html', context)
+
 def detail(request, article_id):
     try:
         article = Article.objects.get(pk=article_id)
