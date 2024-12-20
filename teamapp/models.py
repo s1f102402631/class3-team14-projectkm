@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here
 
@@ -21,3 +22,9 @@ class Comment(models.Model):
     text = models.TextField()
     posted_at = models.DateTimeField(default=timezone.now)
     article = models.ForeignKey(Article, related_name='comments', on_delete=models.CASCADE)
+
+class CustomUser(AbstractUser):
+    studentid = models.CharField(max_length=10, unique=True, null=False, blank=False)
+
+    def __str__(self):
+        return self.username

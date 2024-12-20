@@ -4,9 +4,10 @@ from django.http import Http404, JsonResponse
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from teamapp.models import Article, Comment
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
 from django.contrib.auth.models import User
+from teamapp.models import CustomUser
 
 # Create your views here.
 def index(request):
@@ -98,13 +99,16 @@ def detailscreen(request):
 def home_page(request):
     return render(request, 'teamapp/home_screen.html')
 
+User = get_user_model()
+
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+        studentid = request.POST.get('studentid')
 
-        # ユーザー認証
-        user = authenticate(request, username=username, password=password)
+        # カスタムバックエンドを使ったユーザー認証
+        user = authenticate(request, username=username, password=password, studentid=studentid)
 
         if user is not None:
             # ログイン成功
@@ -112,21 +116,20 @@ def user_login(request):
             return redirect('index')
         else:
             # ログイン失敗
-            messages.error(request, 'ユーザー名またはパスワードが間違っています。')
+            messages.error(request, '学籍番号またはユーザー名またはパスワードが間違っています。')
 
     return render(request, 'teamapp/login_home.html')
 
-#先ほどの下に追加
-#新規アカウントの追加ページ
 def user_create(request):
     if request.method == 'POST':
         new_username = request.POST.get('new_username')
         new_password = request.POST.get('new_password')
+        new_studentid = request.POST.get('new_studentid')
         try:
-            # 新しいユーザーオブジェクトを作成し、ユーザー名とパスワードを設定
-            user = User.objects.create_user(username=new_username, password=new_password)
+            # 新しいユーザーオブジェクトを作成
+            user = User.objects.create_user(username=new_username, password=new_password, studentid=new_studentid)
         except Exception as e:
-            # ユーザ作成失敗
+            # ユーザー作成失敗
             messages.error(request, 'アカウントの作成に失敗しました。エラー: {}'.format(str(e)))
 
     return render(request, 'teamapp/login_create.html')

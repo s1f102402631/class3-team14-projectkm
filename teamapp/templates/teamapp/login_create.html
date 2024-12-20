@@ -15,6 +15,9 @@
     
         <form method="post" action="{% url 'create' %}">
             {% csrf_token %}
+            <label for="studentid">学籍番号:</label>
+            <input type="text" id="studentid" name="studentid">
+            <br>
             <label for="username">ユーザー名:</label>
             <input type="text" id="username" name="new_username">
             <br>
