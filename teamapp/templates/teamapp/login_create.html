@@ -16,13 +16,13 @@
         <form method="post" action="{% url 'create' %}">
             {% csrf_token %}
             <label for="studentid">学籍番号:</label>
-            <input type="text" id="studentid" name="studentid">
+            <input type="text" id="studentid" name="new_studentid">
             <br>
             <label for="username">ユーザー名:</label>
             <input type="text" id="username" name="new_username">
             <br>
             <label for="userpassword">パスワード:</label>
-            <input type="password" id="userpassword" name="new_password">
+            <input type="password" id="password" name="new_password">
             <br>
             <button type="submit">作成</button>
         </form>

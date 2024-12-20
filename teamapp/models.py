@@ -23,8 +23,12 @@ class Comment(models.Model):
     posted_at = models.DateTimeField(default=timezone.now)
     article = models.ForeignKey(Article, related_name='comments', on_delete=models.CASCADE)
 
-class CustomUser(AbstractUser):
-    studentid = models.CharField(max_length=10, unique=True, null=False, blank=False)
 
+class CustomUser(AbstractUser):
+    studentid = models.CharField(max_length=10, unique=True, null=True, blank=False)
+
+    class Meta:
+        db_table = 'custom_user'
+    
     def __str__(self):
         return self.username
