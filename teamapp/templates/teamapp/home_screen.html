@@ -41,9 +41,15 @@
         <h2><a href="{% url 'detail' article.id %}">{{article.title}}</a><h2>
         <small>[{{ article.posted_at }}]</small>
         <div>
-          <a href="#"onclick="like({{article.id}});">
-            Like: <span id="like{{article.id}}">{{ article.like }}</span>
-          </a>
+          <a href="#" class="like-button" data-article-id="{{ article.id }}"> 
+            <span class="like-icon" style="{% if user in article.likes.values_list('user', flat=True) %}
+            color: red;
+            {% else %}
+            color: black;
+            {% endif %}">
+              ♡
+            </span>
+            </a>
         </div>
         <div>
           {{article.body|linebreaksbr}}
@@ -52,9 +58,38 @@
       {% endfor %}    
     {% else %}
     <p>No article.</p>
-    {% endif %}    
+    {% endif %} 
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> //jqueryを利用
+    <script>
+      $(document).ready(function(event){
+        $('.like-button').click(function(event){
+          event.preventDefault();
+
+          var articleId = $(this).data(article_id);
+          var button = $(this);
+
+          $ajax({
+            url: '/article/' + articleId + '/toggle_like/',
+            method: 'POST',
+            success: function(response){
+              if(response.liked){
+                button.find('.like-icon').css('color', 'red');
+              }else{
+                button.find('.like-icon').css('color', 'black');
+              }
+              $('#like_count-' + articleId).text(response.likes_count);
+            },
+            error: function(xhr, status, error){
+              console.log('Error' + error)
+            }
+          });
+        });
+      });
+    </script>
+
     <div style="text-align: center;">
-    <img src="{% static 'teamapp/images/img_20241213_161452.jpg' %}" alt="Uploaded Image" width: 500px; height= 500px;>
+      <img src="{% static 'teamapp/images/img_20241213_161452.jpg' %}" alt="Uploaded Image" width: 500px; height= 500px;>
     </div>
     
         

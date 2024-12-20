@@ -16,4 +16,5 @@ urlpatterns = [
     path('login', views.user_login, name='title'),
     path('create', views.user_create, name='create'),
     path('login/', auth_views.LoginView.as_view(template_name='teamapp/home_screen.html')),
+    path('posts/<int:article_id>/toggle_like/', views.toggle_like, name='toggle_like'),
 ]
