@@ -61,9 +61,25 @@
     <div class="app">
       <div class="header">ヘッダー</div>
       <div class="main">
-        <div class="sidebar">サイドバー   <a href="{% url 'bio' %}">プロフィール</a><br><a href="{% url 'detailscreen' %}">投稿画面</a></div>
+        <div class="sidebar">サイドバー   <a href="{% url 'bio' %}">プロフィール</a>
+          <br><a href="{% url 'detailscreen' %}">投稿画面</a>
+          <br><a href="{% url 'title' %}">リログイン/アカウント作成</a>
+        
+        </div>
         <div class="content">
-          <div class="flex-content">コンテンツ1</div>
+          <div class="flex-content">
+            <div>
+            <label for="textInput">Title</label>
+            <input id="titileInput" name="title" type="text" placeholder="Input title">
+            </div>
+            <div>
+              <label for="textInput">Text</label><br>
+              <textarea id="textInput" name="text" rows="3"></textarea>
+            </div>
+            <div>
+              <button type="submit">Submit</button>
+            </div>
+          </div>
           <div class="fixed-content">コンテンツ2</div>
         </div>
       </div>
