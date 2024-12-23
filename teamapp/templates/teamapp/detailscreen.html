@@ -1,5 +1,67 @@
 {% load static %}
 <!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>横にプルするメニュー</title>
+    <style>
+        .accordion {
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .accordion-bar {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            font-size: 1.2em;
+            width: 100px; /* 固定の幅 */
+            text-align: center;
+        }
+
+        .accordion-content {
+            background-color: #f1f1f1;
+            padding: 15px;
+            width: 0;
+            opacity: 0;
+            white-space: nowrap;
+            transition: width 0.3s ease-out, opacity 0.3s ease-out;
+            position: absolute;
+            top: 0;
+            left: 100%; /* 横方向に展開される位置 */
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .accordion:hover .accordion-content {
+            width: 200px; /* 必要に応じて展開する幅を調整 */
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="accordion">
+    <div class="accordion-bar">メニュー1</div>
+    <div class="accordion-content">
+        この内容が横にプルされます。
+    </div>
+</div>
+<br>
+<div class="accordion">
+    <div class="accordion-bar">メニュー2</div>
+    <div class="accordion-content">
+        別の内容がここに。
+    </div>
+</div>
+
+</body>
+</html>
+
+<!--
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -56,3 +118,4 @@
 
   </body>
 </html>
+-->

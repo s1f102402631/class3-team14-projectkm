@@ -60,11 +60,12 @@
     
         
     <div class="app">
-      <div class="header"><h2>ヘッダー</h2></div>
+      <div class="header"><h2>ヘッダー（このwebアプリの名前等）</h2></div>
       <div class="main">
-        <div class="sidebar">サイドバー   <a href="{% url 'bio' %}">プロフィール</a>
-          <br><a href="{% url 'detailscreen' %}">投稿画面</a>
-          <br><a href="{% url 'title' %}">リログイン/アカウント作成</a>
+        <div class="sidebar">サイドバー  <br><br> <a href="{% url 'bio' %}">プロフィール</a>
+          <br><br><a href="{% url 'detailscreen' %}">投稿画面</a>
+          <br><br><a href="{% url 'title' %}">リログイン/アカウント作成</a>
+          <br><br><p>通知</p><br><p>設定</p>
         
         </div>
         <div class="content">
@@ -87,9 +88,23 @@
               <div class="results" id="results"
                 <!-- 検索結果がここに表示されます -->
               </div>
+              <br>
+              <br>
+<div class="box-container">
+  <div class="box2">（ポスト内容掲示？）</div>
+  <div class="box2"> </div>
+  <div class="box2"> </div>
+  <div class="box2"> </div>
+</div>
+<div class="box-container">
+  <div class="box3">（ポスト内容掲示2）</div>
+  <div class="box3"> </div>
+  <div class="box3"> </div>
+  <div class="box3"> </div>
+</div>
             </div>
           </div>
-          <div class="fixed-content">コンテンツ2</div>
+          <div class="fixed-content">コンテンツ2（広告スペース等）</div>
         </div>
       </div>
     </div>

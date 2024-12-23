@@ -61,3 +61,33 @@
     box-sizing: border-box;
     border: 8px solid darkmagenta;
   }
+  .box-container {
+    display: flex;
+    flex-wrap: wrap; /* 必要に応じて折り返し */
+    gap: 150px; /* ボックス間のスペース */
+}
+
+.box2 {
+    flex: 1 1 30px; /* 自由に伸縮する要素として定義*/
+    padding: 0.5em 1em;
+    margin: 10px; /* 外枠とのスペース */
+    font-weight: bold;
+    color: #6091D3;
+    background: #FFF;
+    border: solid 3px #6091D3;
+    border-radius: 10px;
+}
+.box3 {
+  flex: 1 1 30px; /* 自由に伸縮する要素として定義*/
+  padding: 0.5em 1em;
+  margin: 10px; /* 外枠とのスペース */
+  font-weight: bold;
+  color: #6091D3;
+  background: #FFF;
+  border: solid 3px #6091D3;
+  border-radius: 10px;
+}
+.box2 p {
+    margin: 0; 
+    padding: 0;
+}
