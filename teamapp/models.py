@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here
 
@@ -35,3 +36,12 @@ class Like(models.Model):
 
     def __str__(self):
         return f"{self.user} likes {self.article.title}"
+
+class CustomUser(AbstractUser):
+    studentid = models.CharField(max_length=10, unique=True, null=True, blank=False)
+
+    class Meta:
+        db_table = 'custom_user'
+    
+    def __str__(self):
+        return self.username

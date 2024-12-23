@@ -42,7 +42,19 @@
     box-sizing: border-box;
     border: 8px solid green;
   }
+
+  .flex-content input[type="text"] {
+    text-align: center;
+  }
+
+  .flex-content input[type="button"] {
+    text-align: center;
+  }
   
+  .flex-content input[type="result"] {
+    text-align: center;
+  }
+
   .fixed-content {
     height: 128px;
     background-color: thistle;
