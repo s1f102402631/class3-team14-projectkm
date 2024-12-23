@@ -42,7 +42,7 @@
         <small>[{{ article.posted_at }}]</small>
         <div>
           <a href="#" class="like-button" data-article-id="{{ article.id }}"> 
-            <span class="like-icon" style="{% if user in article.likes.values_list('user', flat=True) %}
+            <span class="like-icon" style="{% if request.user.id in article.likes.values_list('user_id', flat=True) %}
             color: red;
             {% else %}
             color: black;
@@ -60,7 +60,7 @@
     <p>No article.</p>
     {% endif %} 
     
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> //jqueryを利用
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function(event){
         $('.like-button').click(function(event){
