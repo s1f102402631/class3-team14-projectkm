@@ -43,7 +43,7 @@
         <small>[{{ article.posted_at }}]</small>
         <div>
           <a href="#" class="like-button" data-article-id="{{ article.id }}"> 
-            <span class="like-icon" style="{% if request.user.id in article.likes.values_list('user_id', flat=True) %}
+            <span class="like-icon" style="{% if request.studentid in article.likes.values_list('studentid', flat=True) %}
             color: red;
             {% else %}
             color: black;
