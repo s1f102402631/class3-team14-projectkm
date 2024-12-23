@@ -147,6 +147,8 @@ def user_create(request):
         try:
             # 新しいユーザーオブジェクトを作成
             user = User.objects.create_user(username=new_username, password=new_password, studentid=new_studentid)
+            messages.success(request, 'アカウントの作成に成功しました！')
+            return render(request, 'teamapp/login_home.html')
         except Exception as e:
             # ユーザー作成失敗
             messages.error(request, 'アカウントの作成に失敗しました。エラー: {}'.format(str(e)))
