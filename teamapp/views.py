@@ -7,10 +7,9 @@ from teamapp.models import Article, Comment
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404
-from django.http import JsonResponse
-from teamapp.models import Like #新たなlike class
 from teamapp.models import CustomUser
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 def index(request):
@@ -151,6 +150,7 @@ def user_create(request):
             # 新しいユーザーオブジェクトを作成
             user = User.objects.create_user(username=new_username, password=new_password, studentid=new_studentid)
             messages.success(request, 'アカウントの作成に成功しました！')
+            user.save()
             return render(request, 'teamapp/login_home.html')
         except Exception as e:
             # ユーザー作成失敗
@@ -158,19 +158,14 @@ def user_create(request):
 
     return render(request, 'teamapp/login_create.html')
 
-#ユーザがいいねをすでにしているかどうかを確認
-#@login_required ログイン機能追加後に記入
+@login_required 
 def toggle_like(request, posted_at):
     post = get_object_or_404(Post, posted_at)
-
     like, created = Like.objects.get_or_create(user=request.user, post=post)
-
     if not created: #すでにいいねしているとき
         like.delete()
         liked = False
     else:
         liked = True
-
     likes_count = post.like_set.count()
     return JsonResponse({'liked': liked, 'likes_count': likes_count})
-
