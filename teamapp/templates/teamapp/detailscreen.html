@@ -6,47 +6,40 @@
     <title>投稿画面</title>
     <script type="text/javascript" src="{% static 'teamapp/js/sistem.js' %}" ></script>
     <style type="text/css"></style>
+    <link rel="stylesheet" href="{% static 'teamapp/detailscreen.css' %}">
   </head>
   <body>
     <h1>Django Sample Application</h1>
-    <p>You can submit articles from the following form.</p>
+    <br>
  
     <p>投稿の表示先は現在ホーム画面
     </p>
+    <br>
+    <br>
+
     <form action="{% url 'index' %}" method="post">
       {% csrf_token %}
-      <div>
-        <label for="titleInput">Title</label><br>
-        <input id="titleInput" name="title" type="text" placeholder="Input title">
-      </div>
-      <div>
-        <label for="textInput">Text</label><br>
-        <textarea id="textInput" name="text" rows="3"></textarea>
-      </div>
-      <div>
-        <button type="submit">Submit</button>
+      
+      <!-- Title と Text をまとめた枠 -->
+      <div class="form-wrapper">
+        <div>
+          <label for="titleInput">Title</label>
+          <input id="titleInput" name="title" type="text" placeholder="Input title">
+        </div>
+        <div>
+          <label for="textInput">Text</label>
+          <textarea id="textInput" name="text" rows="3" placeholder=""></textarea>
+        </div>
       </div>
       
-    </form>
-
-    {% if articles %}
-      {% for article in articles %}
-      <div class="text">
-        <h2><a href="{% url 'detail' article.id %}">{{article.title}}</a><h2>
-        <small>[{{ article.posted_at }}]</small>
-        <div>
-          <a href="#"onclick="like({{article.id}});">
-            Like: <span id="like{{article.id}}">{{ article.like }}</span>
-          </a>
-        </div>
-        <div>
-          {{article.body|linebreaksbr}}
-        </div>
+      <!-- Submit ボタン -->
+      <div class="button-wrapper">
+        <button type="submit">Submit</button>
       </div>
-      {% endfor %}    
-    {% else %}
-    <p>No article.</p>
-    {% endif %}   
+    </form>
+    
+    
+
 
     <!--以下保留
     
@@ -94,7 +87,10 @@
     
     
     
+    
     -->
+
+    
         
 
   </body>
