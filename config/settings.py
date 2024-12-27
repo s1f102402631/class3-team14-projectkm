@@ -131,3 +131,8 @@ AUTHENTICATION_BACKENDS = [
     'teamapp.backends.CustomAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+LOGIN_URL = '/login/'
+
+LOGIN_REDIRECT_URL = '/bio/'
+

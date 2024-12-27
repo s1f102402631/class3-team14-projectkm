@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Login</title>
+        <link rel="stylesheet" href="{% static 'teamapp/login_home.css' %}">
     </head>
     <body>
         {% if messages %}
@@ -12,22 +13,22 @@
             {% endfor %}
         </ul>
         {% endif %}
-
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
             <label for="studentid">学籍番号:</label>
             <input type="text" id="studentid" name="studentid" required>
-            <br>
+            
             <label for="username">ユーザー名:</label>
             <input type="text" id="username" name="username" required>
-            <br>
-            <label for="password">パスワード:</label>
+            
+            <label for="userpassword">パスワード:</label>
             <input type="password" id="password" name="password" required>
-            <br>
-
+            
             <input type="submit" value="ログイン">
-            <input type="hidden" name="next" value="{{ next }}">
+            <input type="hidden" name="next" value="{{ next }}"> 
+            <a href="{% url 'create' %}">アカウント作成</a>
         </form>
-        <a href="{% url 'create' %}">アカウント作成</a>
+        
+        <a href="{% url 'index' %}">トップ</a>
     </body>
 </html>
