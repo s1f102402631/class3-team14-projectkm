@@ -10,42 +10,28 @@
 <body>
     <div class="profile-container">
         <img src="/api/placeholder/200/200" alt="プロフィール画像" class="profile-image">
-        <a href="{% url 'bio' %}">編集</a>
-        <h1 class="anonymized">ユーザー名：{{ username }}</h1>
-        <p class="anonymized">学籍番号：{{ studentid }}</p>
+        <a href="{% url 'bio_edit' %}">編集する</a>
+        <h2>ユーザー名：{{ username }}</h1>
+        <p>学籍番号：{{ studentid }}</p>
         
         <h2>自己紹介</h2>
         <p>
-            例）テクノロジーと創造性を融合させることに夢中な
-            大学生です。プログラミングやデザイン、音楽など
-            多様な興味を持っています。常に新しいことを
-            学ぶことに情熱を注いでいます。
-            {{acoount.detail}}
+            {{ profile.self_info }}
         </p>
         
         <h2>パーソナリティ</h2>
         <p>
-            MBTI: {{acoount.mbti}}<br>
+            MBTI: {{ profile.mbti }}<br>
             エニアグラム: タイプ 5<br>
             好奇心旺盛で分析的、独創的な思考を大切にしています。
         </p>
         
         <h2>趣味・関心</h2>
-        <div class="interests">
-            <span class="interest-tag">プログラミング</span>
-            <span class="interest-tag">ゲーム制作</span>
-            <span class="interest-tag">映画鑑賞</span>
-            <span class="interest-tag">電子音楽</span>
-            <span class="interest-tag">ボードゲーム</span>
-            <span class="interest-tag">写真撮影</span>
-        </div>
-        
+        {{ profile.hobby }}
+
         <h2>好きなこと</h2>
         <p>
-            例）コーディング / 新しいアプリやゲームの開発 / 
-            Spotifyで音楽探索 / 友人とのボードゲーム / 
-            YouTubeでの学習と情報収集
-            {{acoount.like}}
+            {{ profile.fav }}
         </p>
     </div>
 </body>

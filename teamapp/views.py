@@ -115,7 +115,13 @@ def api_like(request, article_id):
 
 @login_required()
 def bio(request):
-    return render(request, "teamapp/bio.html")
+    profile = get_object_or_404(Profile, user=request.user)
+    context = {
+        'profile': profile,
+        'username': request.user.username,
+        'studentid': request.user.studentid
+    }
+    return render(request, "teamapp/bio.html", context)
 
 def detailscreen(request):
     return render(request, 'teamapp/detailscreen.html')
@@ -187,5 +193,5 @@ def bio_edit(request):
             return redirect('bio')
     else:
         form = ProfileForm(instance=profile)
-    
+
     return render(request, 'teamapp/bio_edit.html', {'form': form})
