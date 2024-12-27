@@ -1,9 +1,9 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="ja">
     <head>
         <meta charset="UTF-8">
         <title>Login</title>
+        <link rel="stylesheet" href="{% static 'teamapp/login_home.css' %}">
     </head>
     <body>
         {% if messages %}
@@ -13,22 +13,22 @@
             {% endfor %}
         </ul>
         {% endif %}
-    
-        <form method="post" action="{% url 'title' %}">
+        <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
             <label for="studentid">学籍番号:</label>
-            <input type="text" id="studentid" name="studentid">
-            <br>
+            <input type="text" id="studentid" name="studentid" required>
+            
             <label for="username">ユーザー名:</label>
-            <input type="text" id="username" name="username">
-            <br>
+            <input type="text" id="username" name="username" required>
+            
             <label for="userpassword">パスワード:</label>
-            <input type="password" id="password" name="password">
-            <br>
+            <input type="password" id="password" name="password" required>
             
             <input type="submit" value="ログイン">
             <input type="hidden" name="next" value="{{ next }}"> 
+            <a href="{% url 'create' %}">アカウント作成</a>
         </form>
-        <a href="{% url 'create' %}">アカウント作成</a>
+        
+        <a href="{% url 'index' %}">トップ</a>
     </body>
 </html>

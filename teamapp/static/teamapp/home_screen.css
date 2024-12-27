@@ -61,3 +61,66 @@
     box-sizing: border-box;
     border: 8px solid darkmagenta;
   }
+  .box-container {
+    display: flex;
+    flex-wrap: wrap; /* 必要に応じて折り返し */
+    gap: 150px; /* ボックス間のスペース */
+}
+
+.box2 {
+    flex: 1 1 30px; /* 自由に伸縮する要素として定義*/
+    padding: 0.5em 1em;
+    margin: 10px; /* 外枠とのスペース */
+    font-weight: bold;
+    color: #6091D3;
+    background: #FFF;
+    border: solid 3px #6091D3;
+    border-radius: 10px;
+}
+.box3 {
+  flex: 1 1 30px; /* 自由に伸縮する要素として定義*/
+  padding: 0.5em 1em;
+  margin: 10px; /* 外枠とのスペース */
+  font-weight: bold;
+  color: #6091D3;
+  background: #FFF;
+  border: solid 3px #6091D3;
+  border-radius: 10px;
+}
+.box2 p {
+    margin: 0; 
+    padding: 0;
+}
+.accordion {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.accordion-bar {
+  background-color: #efd3aa;
+  color: white;
+  padding: 15px;
+  font-size: 1.2em;
+  width: 50px; /* 固定の幅 */
+  text-align: center;
+}
+
+.accordion-content {
+  background-color: #f1f1f1;
+  padding: 15px;
+  width: 0;
+  opacity: 0;
+  white-space: nowrap;
+  transition: width 0.3s ease-out, opacity 0.3s ease-out;
+  position: absolute;
+  top: 0;
+  left: 100%; /* 横方向に展開される位置 */
+  z-index: 1;
+  overflow: hidden;
+}
+
+.accordion:hover .accordion-content {
+  width: 200px; /* 必要に応じて展開する幅を調整 */
+  opacity: 1;
+}
