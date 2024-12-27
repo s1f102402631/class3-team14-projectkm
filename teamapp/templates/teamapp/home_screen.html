@@ -123,7 +123,7 @@
               </a>
             </div>
             <div class="accordion-content">
-              ログアウト
+              ログアウト(動かない)
             </div>
             {% else %}
             <div class="accordion-bar">
@@ -183,7 +183,7 @@
               <h1>検索機能</h1>
               <input type="text" id="serchBox" placeholder="キーワードを入力してください">
               <input type="button" value="検索" onclick="search()">
-              <div class="results" id="results"
+              <div class="results" id="results">
                 <!-- 検索結果がここに表示されます -->
               </div>
               <br>
@@ -200,7 +200,7 @@
                       <h2><a href="{% url 'detail' article.id %}">{{ article.title }}</a></h2>
                       <small>[{{ article.posted_at }}]</small>
                       <div>
-                        <a href="#" onclick="like({{ article.id }});">
+                        <a href="#"onclick="like({{ article.id }});">
                           Like: <span id="like{{ article.id }}">{{ article.like }}</span>
                         </a>
                       </div>

@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.core.validators import RegexValidator
 
 # Create your models here
 
@@ -36,12 +37,12 @@ class CustomUser(AbstractUser):
         return self.username
     
 class Profile(models.Model):
-    #user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     #studentid = models.CharField(max_length=10)
     self_info = models.TextField()
-    mbti = models.CharField(max_length=4)
+    mbti = models.CharField(max_length=4, validators=[RegexValidator(regex='^[IE][NS][TF][JP]$',message='MBTIは有効な4文字の組み合わせである必要があります',),])
     hobby = models.CharField(max_length=255)
     fav = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.self_info
+        return self.user.username
