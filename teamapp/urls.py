@@ -19,5 +19,4 @@ urlpatterns = [
     path('create', views.user_create, name='create'),
     path('login/', LoginView.as_view(template_name='teamapp/login_home.html')),
     path("logout/", LogoutView.as_view(next_page='index'), name="logout"),
-    path('bio/edit', views.bio_edit, name='bio_edit')
 ]
