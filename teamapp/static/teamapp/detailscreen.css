@@ -1,51 +1,48 @@
-* {
-    margin: 0;
-    padding: 0;
-  }
-  
-  .app {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .header {
-    height: 48px;
-    background-color: lightcyan;
-    box-sizing: border-box;
-    border: 8px solid blue;
-  }
-  
-  .main {
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-  }
-  
-  .sidebar {
-    width: 96px;
-    background-color: moccasin;
-    box-sizing: border-box;
-    border: 8px solid chocolate;
-  }
-  
-  .content {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-  }
-  
-  .flex-content {
-    flex-grow: 1;
-    background-color: palegoldenrod;
-    box-sizing: border-box;
-    border: 8px solid green;
-  }
-  
-  .fixed-content {
-    height: 128px;
-    background-color: thistle;
-    box-sizing: border-box;
-    border: 8px solid darkmagenta;
-  }
+/* Title と Text を囲む枠のスタイル */
+.form-wrapper {
+  border: 1px solid #4CAF50;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  max-width: 300px;
+}
+
+/* 入力フィールドのスタイル */
+input[type="text"], textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* ラベルのスタイル */
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Submit ボタンの左詰め設定 */
+.button-wrapper {
+  text-align: left; /* ボタンを左詰めに配置 */
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  display: inline-block; /* 左詰め用のインラインブロック設定 */
+}
+
+button:hover {
+  background-color: #45a049;
+}

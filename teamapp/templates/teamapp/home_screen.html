@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
+    <!--移行した。元のコードと位置。
     <h1>Django Sample Application</h1>
     <p>You can submit articles from the following form.</p>
     <form action="{% url 'index' %}" method="post">
@@ -66,7 +67,10 @@
       {% endfor %}    
     {% else %}
     <p>No article.</p>
-    {% endif %}    
+    {% endif %}   
+      --> 
+        
+      <h1>Django Sample Application</h1>
     <div style="text-align: center;">
     <img src="{% static 'teamapp/images/img_20241213_161452.jpg' %}" alt="Uploaded Image" width: 500px; height= 500px;>
 
@@ -127,7 +131,7 @@
             </a>
           </div>
           <div class="accordion-content">
-            投稿 （なぜか投稿できない）
+            投稿画面
           </div>
       </div>
         <div class="accordion">
@@ -149,6 +153,7 @@
         </div>
         <div class="content">
           <div class="flex-content">
+                      <!--一旦非表示
             <div>
             <label for="textInput">Title</label>
             <input id="titileInput" name="title" type="text" placeholder="Input title">
@@ -161,6 +166,7 @@
               <button type="submit">Submit</button>
             </div>
             <div>
+            -->
               <h1>検索機能</h1>
               <input type="text" id="serchBox" placeholder="キーワードを入力してください">
               <input type="button" value="検索" onclick="search()">
@@ -168,22 +174,46 @@
                 <!-- 検索結果がここに表示されます -->
               </div>
               <br>
+              <div>
+                <a href="{% url 'index' %}?sort=data">最新</a>
+                <a href="{% url 'index' %}?sort=like">いいね順</a>
+              </div>
               <br>
-<div class="box-container">
-  <div class="box2">（ポスト内容掲示？）</div>
-  <div class="box2"> </div>
-  <div class="box2"> </div>
-  <div class="box2"> </div>
-</div>
-<div class="box-container">
-  <div class="box3">（ポスト内容掲示2）</div>
-  <div class="box3"> </div>
-  <div class="box3"> </div>
-  <div class="box3"> </div>
-</div>
-            </div>
-          </div>
-          <div class="fixed-content">コンテンツ2（広告スペース等）</div>
+              <div class="box-container">
+                {% if articles %}
+                  {% for article in articles %}
+                  <div class="box2">
+                    <div class="text">
+                      <h2><a href="{% url 'detail' article.id %}">{{ article.title }}</a></h2>
+                      <small>[{{ article.posted_at }}]</small>
+                      <div>
+                        <a href="#" onclick="like({{ article.id }});">
+                          Like: <span id="like{{ article.id }}">{{ article.like }}</span>
+                        </a>
+                      </div>
+                      <div>
+                        {{ article.body|linebreaksbr }}
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                {% else %}
+                  <div class="box2">
+                    <p>No article.</p>
+                  </div>
+                {% endif %}
+                
+                <!-- 以下はその他のボックスが続く -->
+                <div class="box2"> </div>
+                <div class="box2"> </div>
+              </div>
+              <div class="box-container">
+                <div class="box3">（ポスト内容掲示）</div>
+                <div class="box3"> </div>
+                <div class="box3"> </div>
+                <div class="box3"> </div>
+              </div>
+              <div class="fixed-content">コンテンツ2（広告スペース等）</div>
         </div>
       </div>
     </div>
