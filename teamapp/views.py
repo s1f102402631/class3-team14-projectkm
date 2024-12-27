@@ -115,13 +115,16 @@ def api_like(request, article_id):
 
 @login_required()
 def bio(request):
-    profile = get_object_or_404(Profile, user=request.user)
-    context = {
-        'profile': profile,
-        'username': request.user.username,
-        'studentid': request.user.studentid
-    }
-    return render(request, "teamapp/bio.html", context)
+    try:
+        profile = Profile.objects.get(user=request.user)
+        context = {
+            'profile': profile,
+            'username': request.user.username,
+            'studentid': request.user.studentid
+        }
+        return render(request, "teamapp/bio.html", context)
+    except Profile.DoesNotExist:
+        return redirect('bio_edit')
 
 def detailscreen(request):
     return render(request, 'teamapp/detailscreen.html')
