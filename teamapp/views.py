@@ -145,7 +145,7 @@ def user_login(request):
             return render(request, 'teamapp/login_home.html', context)
         else:
             # ログイン失敗
-            messages.error(request, '正しい学籍番号またはユーザー名またはパスワードを入力してください。')
+            messages.error(request, '正しい情報を入力してください。')
 
     context = {
         'username': request.POST.get('username', ''),
@@ -184,7 +184,7 @@ def bio_edit(request):
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('bio')  # 適切なリダイレクト先を設定
+            return redirect('bio')
     else:
         form = ProfileForm(instance=profile)
     

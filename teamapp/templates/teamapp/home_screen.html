@@ -119,20 +119,24 @@
         <div class="accordion">
           {% if user.is_authenticated %}
             <div class="accordion-bar">
-              <a href="{% url 'logout' %}">
+              <form method="post" action="{% url 'logout' %}">
                 {% csrf_token %}
-                <img src="{% static 'teamapp\images\スクリーンショット 2024-12-24 042329.png' %}" alt="Screenshot" width: 50px; height= 50px;>
-              </a>
+                <button type="submit" style="border: none; background: none; padding: 0; cursor: pointer;">
+                    <img src="{% static 'teamapp/images/スクリーンショット 2024-12-24 042329.png' %}" alt="Logout" width="50" height="50">
+                </button>
+              </form>
             </div>
             <div class="accordion-content">
-              ログアウト(動かない)
+              ログアウト
             </div>
             {% else %}
             <div class="accordion-bar">
-              <a href="{% url 'login' %}">
+              <form method="post" action="{% url 'login' %}">
                 {% csrf_token %}
-                <img src="{% static 'teamapp\images\スクリーンショット 2024-12-24 042329.png' %}" alt="Screenshot" width: 50px; height= 50px;>
-              </a>
+                <button type="submit" style="border: none; background: none; padding: 0; cursor: pointer;">
+                    <img src="{% static 'teamapp/images/スクリーンショット 2024-12-24 042329.png' %}" alt="Login" width="50" height="50">
+                </button>
+              </form>
             </div>
             <div class="accordion-content">
               ログイン/アカウント作成
