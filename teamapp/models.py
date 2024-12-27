@@ -29,16 +29,6 @@ class Comment(models.Model):
     posted_at = models.DateTimeField(default=timezone.now)
     article = models.ForeignKey(Article, related_name='comments', on_delete=models.CASCADE)
 
-class Like(models.Model):
-    user = models.ForeignKey(custom_user, on_delete=models.CASCADE)
-    article = models.ForeignKey(Article, related_name='likes', on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        unique_together = ('user', 'article')
-
-    def __str__(self):
-        return f"{self.user} likes {self.article.title}"
 
 class CustomUser(AbstractUser):
     username_validator = UnicodeUsernameValidator()
