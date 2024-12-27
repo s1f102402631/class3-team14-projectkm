@@ -127,4 +127,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTHENTICATION_BACKENDS = ['teamapp.backends.CustomAuthBackend']
+AUTHENTICATION_BACKENDS = [
+    'teamapp.backends.CustomAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]

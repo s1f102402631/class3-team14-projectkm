@@ -13,7 +13,7 @@ urlpatterns = [
     path('bio', views.bio, name='bio'),
     path('detailscreen', views.detailscreen, name='detailscreen'),
     #path('home', views.index, name='index'),
-    path('login', views.user_login, name='title'),
+    path('login', views.user_login, name='login'),
     path('create', views.user_create, name='create'),
     path('login/', auth_views.LoginView.as_view(template_name='teamapp/home_screen.html')),
 ]

@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from teamapp.models import CustomUser
 
+
 # Create your views here.
 def index(request):
     if request.method == 'POST':
@@ -146,8 +147,9 @@ def user_create(request):
         new_studentid = request.POST.get('new_studentid')
         try:
             # 新しいユーザーオブジェクトを作成
-            user = User.objects.create_user(username=new_username, password=new_password, studentid=new_studentid)
+            user = CustomUser.objects.create_user(username=new_username, password=new_password, studentid=new_studentid)
             messages.success(request, 'アカウントの作成に成功しました！')
+            user.save()
             return render(request, 'teamapp/login_home.html')
         except Exception as e:
             # ユーザー作成失敗

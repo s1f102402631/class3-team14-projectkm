@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.validators import UnicodeUsernameValidator
 
 # Create your models here
 
@@ -25,7 +26,13 @@ class Comment(models.Model):
 
 
 class CustomUser(AbstractUser):
-    studentid = models.CharField(max_length=10, unique=True, null=True, blank=False)
+    username_validator = UnicodeUsernameValidator()
+    studentid = models.CharField(max_length=10, unique=True,)
+    username = models.CharField(max_length=150, unique=True, validators=[username_validator],)
+    password = models.CharField(max_length=100,)
+
+    USERNAME_FIELD = "username"
+    REQUIRED_FIELDS = ["studentid"]
 
     class Meta:
         db_table = 'custom_user'
