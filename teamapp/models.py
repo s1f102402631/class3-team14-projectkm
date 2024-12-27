@@ -1,14 +1,23 @@
 from django.db import models
 from django.utils import timezone
-from django.db import models
-from django.utils import timezone
-from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
-from teamapp.models import CustomUser
 from django.conf import settings
 from django.contrib.auth.validators import UnicodeUsernameValidator
 
-# Create your models here
+class CustomUser(AbstractUser):
+    username_validator = UnicodeUsernameValidator()
+    studentid = models.CharField(max_length=10, unique=True)
+    username = models.CharField(max_length=150, unique=True, validators=[username_validator])
+    password = models.CharField(max_length=100)
+
+    USERNAME_FIELD = "username"
+    REQUIRED_FIELDS = ["studentid"]
+
+    class Meta:
+        db_table = 'custom_user'
+
+    def __str__(self):
+        return self.username
 
 class Article(models.Model):
     title = models.CharField(max_length=200)
@@ -30,7 +39,7 @@ class Comment(models.Model):
     article = models.ForeignKey(Article, related_name='comments', on_delete=models.CASCADE)
 
 class Like(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     article = models.ForeignKey(Article, related_name='likes', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -40,24 +49,8 @@ class Like(models.Model):
     def __str__(self):
         return f"{self.user} likes {self.article.title}"
 
-class CustomUser(AbstractUser):
-    username_validator = UnicodeUsernameValidator()
-    studentid = models.CharField(max_length=10, unique=True,)
-    username = models.CharField(max_length=150, unique=True, validators=[username_validator],)
-    password = models.CharField(max_length=100,)
-
-    USERNAME_FIELD = "username"
-    REQUIRED_FIELDS = ["studentid"]
-
-    class Meta:
-        db_table = 'custom_user'
-    
-    def __str__(self):
-        return self.username
-    
 class Profile(models.Model):
-    #user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    #studentid = models.CharField(max_length=10)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     self_info = models.TextField()
     mbti = models.CharField(max_length=4)
     hobby = models.CharField(max_length=255)

@@ -156,3 +156,15 @@ def user_create(request):
             messages.error(request, 'アカウントの作成に失敗しました。エラー: {}'.format(str(e)))
 
     return render(request, 'teamapp/login_create.html')
+
+@login_required 
+def toggle_like(request, posted_at):
+    post = get_object_or_404(Post, posted_at)
+    like, created = Like.objects.get_or_create(user=request.user, post=post)
+    if not created: #すでにいいねしているとき
+        like.delete()
+        liked = False
+    else:
+        liked = True
+    likes_count = post.like_set.count()
+    return JsonResponse({'liked': liked, 'likes_count': likes_count})
