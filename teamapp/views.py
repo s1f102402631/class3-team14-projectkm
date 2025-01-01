@@ -205,5 +205,5 @@ def configuration_view(request):
         if 'delete_account' in request.POST:
             user = request.user
             user.delete()
-            return redirect('login_create.html')
+            return redirect('configuration')
     return render(request, 'configuration.html')
