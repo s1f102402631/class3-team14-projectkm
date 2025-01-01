@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>設定画面</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>設定画面</title>
+</head>
+<body>
+    <from method="POST">
+        {% csrf_token %}
+        <!-- 他の設定項目をここに追加できます -->
+        <button type="submit" name="delete_account">アカウントを削除</button>
+    </from>
 </html>
