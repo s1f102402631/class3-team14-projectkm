@@ -198,3 +198,6 @@ def bio_edit(request):
         form = ProfileForm(instance=profile)
 
     return render(request, 'teamapp/bio_edit.html', {'form': form})
+
+def configuration_view(request):
+    return render(request, 'configuration.html')
