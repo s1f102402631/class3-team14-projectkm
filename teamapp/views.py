@@ -200,4 +200,9 @@ def bio_edit(request):
     return render(request, 'teamapp/bio_edit.html', {'form': form})
 
 def configuration_view(request):
+    if request.method == 'POST':
+        if 'delete_account' in request.POST:
+            user = request.user
+            user.delete()
+            return redirect('home_screen')
     return render(request, 'configuration.html')
