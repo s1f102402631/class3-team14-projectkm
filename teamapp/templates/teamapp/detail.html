@@ -7,22 +7,22 @@
     <link rel="stylesheet" href="{% static 'teamapp/detail.css' %}">
   </head>
   <body>
-    <h1>Django Sample Application</h1>
-    <h2>Title: {{ article.title }}</h2>
+    <h1></h1>
+    <h2>タイトル: {{ article.title }}</h2>
     <small>Posted at:{{ article.posted_at }}</small>
     <div>
       {{ article.body | linebreaksbr }}
     </div>
 
-    <h2>Comments</h2>
+    <h2>コメント追加</h2>
     <form action="{% url 'detail' article.id %}" method="post">
       {% csrf_token %}
       <div>
-        <label for="textInput">Text</label><br>
+        <label for="textInput">テキスト</label><br>
         <textarea id="textInput" name="text" rows="3"></textarea>
       </div>
       <div>
-        <button type="submit">Submit</button>
+        <button type="submit">投稿</button>
       </div>
     </form>
     {% if comments %}
@@ -35,13 +35,13 @@
     </div>
     {% endfor %}
     {% else %}
-    <p>No comment.</p>
+    <p>コメント0</p>
     {% endif %}
     <hr>
     <p>
-      <a href="{% url 'index' %}">Top</a>
-      <a href="{% url 'update' article.id %}">Edit</a>
-      <a href="{% url 'delete' article.id %}">Delete</a>
+      <a href="{% url 'index' %}">ホーム</a>
+      <a href="{% url 'update' article.id %}">編集</a>
+      <a href="{% url 'delete' article.id %}">削除</a>
     </p>
   </body>
 </html>

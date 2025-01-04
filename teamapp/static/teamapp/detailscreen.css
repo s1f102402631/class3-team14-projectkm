@@ -27,9 +27,9 @@ label {
   margin-bottom: 5px;
 }
 
-/* Submit ボタンの左詰め設定 */
+/* Submit ボタンの詰め設定 */
 .button-wrapper {
-  text-align: left; /* ボタンを左詰めに配置 */
+  text-align: right; /* ボタン配置 */
 }
 
 button {
@@ -40,7 +40,7 @@ button {
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
-  display: inline-block; /* 左詰め用のインラインブロック設定 */
+  display: inline-block; /* インラインブロック設定 */
 }
 
 button:hover {
