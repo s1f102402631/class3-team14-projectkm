@@ -206,4 +206,4 @@ def configuration_view(request):
             user = request.user
             user.delete()
             return redirect('home_screen')
-    return render(request, 'configuration.html')
+    return render(request, 'teamapp/configuration.html')
