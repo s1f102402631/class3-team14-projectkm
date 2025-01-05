@@ -17,7 +17,7 @@ urlpatterns = [
     #path('home', views.index, name='index'),
     path('login', views.user_login, name='login'),
     path('create', views.user_create, name='create'),
-    path('posts/<int:article_id>/toggle_like/', views.toggle_like, name='toggle_like'),
+    path('article/<int:article_id>/toggle_like/', views.toggle_like, name='toggle_like'),
     path('login/', LoginView.as_view(template_name='teamapp/login_home.html')),
     path("logout/", LogoutView.as_view(next_page='index'), name="logout"),
     path('bio/edit', views.bio_edit, name='bio_edit'),

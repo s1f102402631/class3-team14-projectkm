@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.http import Http404, JsonResponse
 from django.shortcuts import render, redirect
 from django.utils import timezone
-from teamapp.models import Article, Comment
+from teamapp.models import Article, Comment, Like
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -157,14 +157,47 @@ def user_create(request):
 
     return render(request, 'teamapp/login_create.html')
 
-@login_required 
-def toggle_like(request, posted_at):
-    post = get_object_or_404(Post, posted_at)
-    like, created = Like.objects.get_or_create(user=request.user, post=post)
-    if not created: #すでにいいねしているとき
-        like.delete()
-        liked = False
+#@login_required 
+def toggle_like(request, article_id):
+    article = get_object_or_404(Article, id=article_id)
+    user = request.user
+
+    if request.method == 'POST':
+        if user.is_authenticated:
+            if article.likes.filter(id=user.id).exists():
+                article.likes.remove(user)
+                liked = False
+            else:
+                article.likes.add(user)
+                liked = True
+            likes_count = article.likes.count()
+
+            return JsonResponse({'liked': liked, 'likes_count': likes_count})
+    
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+
+@login_required
+def bio_edit(request):
+    
+    profile, created = Profile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('bio')
     else:
-        liked = True
-    likes_count = post.like_set.count()
-    return JsonResponse({'liked': liked, 'likes_count': likes_count})
+        form = ProfileForm(instance=profile)
+
+    return render(request, 'teamapp/bio_edit.html', {'form': form})
+
+def some_view(request):
+    articles = Article.objects.all()
+    for article in articles:
+        article.is_liked_by_student = request.studentid in article.likes.values_list('studentid', flat=True)
+    context = {
+        'articles': articles,
+        'user': request.user,
+        # 他のコンテキスト追加可能
+    }
+    return render(request, 'home_screen.html', context)
