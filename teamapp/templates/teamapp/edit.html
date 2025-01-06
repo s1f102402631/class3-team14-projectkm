@@ -8,6 +8,8 @@
   </head>
   <body>
     <h1 >編集</h1>
+    <br>
+    <br>
     <form action="{% url 'update' article.id %}" method="post">
       {% csrf_token %}
       <div>

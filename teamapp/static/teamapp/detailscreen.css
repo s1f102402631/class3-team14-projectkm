@@ -29,7 +29,7 @@ label {
 
 /* Submit ボタンの詰め設定 */
 .button-wrapper {
-  text-align: right; /* ボタン配置 */
+  text-align: left; /* ボタン配置 */
 }
 
 button {
