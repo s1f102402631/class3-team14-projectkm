@@ -9,7 +9,6 @@
   <body>
     <h1 >編集</h1>
     <br>
-    <br>
     <form action="{% url 'update' article.id %}" method="post">
       {% csrf_token %}
       <div>
@@ -22,7 +21,7 @@
         <textarea id="textInput" name="text" rows="3"> {{ article.body }}</textarea>
       </div>
       <div>
-        <button type="submit">投稿</button>
+        <button type="submit">完了</button>
       </div>
     </form>
   </body>

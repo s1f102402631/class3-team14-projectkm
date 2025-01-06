@@ -1,48 +1,72 @@
 /* Title と Text を囲む枠のスタイル */
 .form-wrapper {
-  border: 1px solid #4CAF50;
-  border-radius: 6px;
-  padding: 15px;
-  margin-bottom: 20px;
+  border: 2px solid #4CAF50; /* 枠を太く */
+  border-radius: 8px; /* 少し大きめの角丸 */
+  padding: 20px; /* 内側の余白を広げる */
+  margin-bottom: 30px; /* 下の要素との間隔を広げる */
   background-color: #f9f9f9;
-  max-width: 300px;
+  max-width: 500px; /* 幅を広げる */
 }
 
 /* 入力フィールドのスタイル */
 input[type="text"], textarea {
   width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
+  padding: 15px; /* 内側の余白を大きく */
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #ccc; /* 境界線を太く */
+  border-radius: 6px; /* 角を少し丸く */
+  font-size: 18px; /* フォントサイズを大きく */
   box-sizing: border-box;
 }
 
 /* ラベルのスタイル */
 label {
+  font-size: 18px; /* ラベルの文字を大きく */
   font-weight: bold;
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 8px; /* ラベルと入力欄の間隔を広げる */
 }
 
-/* Submit ボタンの詰め設定 */
+/* Submit ボタンのスタイル */
 .button-wrapper {
-  text-align: left; /* ボタン配置 */
+  text-align: center; /* ボタンを中央に配置 */
 }
 
 button {
   background-color: #4CAF50;
   color: white;
-  padding: 8px 15px;
+  padding: 15px 25px; /* ボタンの内側余白を大きく */
   border: none;
-  border-radius: 4px;
+  border-radius: 6px; /* 角を少し丸く */
   cursor: pointer;
-  font-size: 14px;
-  display: inline-block; /* インラインブロック設定 */
+  font-size: 18px; /* ボタンの文字サイズを大きく */
+  display: inline-block;
 }
 
 button:hover {
   background-color: #45a049;
 }
+
+/* 全体を画面中央に配置するためのスタイル */
+body {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+form {
+  text-align: center;
+}
+
+/* h1 見出しのスタイル */
+h1 {
+  font-size: 28px; /* 見出しの文字サイズを大きく */
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px; /* 見出しとフォームの間隔を広げる */
+}
+
