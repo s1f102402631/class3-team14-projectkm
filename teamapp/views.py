@@ -1,14 +1,16 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.http import Http404, JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from teamapp.models import Article, Comment, Like
+from teamapp.models import Article, Comment, Like, Profile
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
 from django.contrib.auth.models import User
 from teamapp.models import CustomUser
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from teamapp.forms import ProfileForm
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
@@ -111,8 +113,18 @@ def api_like(request, article_id):
     }
     return JsonResponse(result)
 
+@login_required()
 def bio(request):
-    return render(request, "teamapp/bio.html")
+    try:
+        profile = Profile.objects.get(user=request.user)
+        context = {
+            'profile': profile,
+            'username': request.user.username,
+            'studentid': request.user.studentid
+        }
+        return render(request, "teamapp/bio.html", context)
+    except Profile.DoesNotExist:
+        return redirect('bio_edit')
 
 def detailscreen(request):
     return render(request, 'teamapp/detailscreen.html')
@@ -134,12 +146,22 @@ def user_login(request):
         if user is not None:
             # ログイン成功
             login(request, user)
-            return redirect('index')
+            messages.success(request, 'ログインに成功しました！')
+            context = {
+                'username': username,
+                'studentid': studentid,
+            }
+            return render(request, 'teamapp/login_home.html', context)
         else:
             # ログイン失敗
-            messages.error(request, '学籍番号またはユーザー名またはパスワードが間違っています。')
+            messages.error(request, '正しい情報を入力してください。')
 
-    return render(request, 'teamapp/login_home.html')
+    context = {
+        'username': request.POST.get('username', ''),
+        'studentid': request.POST.get('studentid', ''),
+    }
+
+    return render(request, 'teamapp/login_home.html', context)
 
 def user_create(request):
     if request.method == 'POST':
@@ -155,51 +177,4 @@ def user_create(request):
         except Exception as e:
             # ユーザー作成失敗
             messages.error(request, 'アカウントの作成に失敗しました。エラー: {}'.format(str(e)))
-
     return render(request, 'teamapp/login_create.html')
-
-#@login_required 
-def toggle_like(request, article_id):
-    article = get_object_or_404(Article, pk=article_id)
-    user = request.user
-
-    if request.method == 'POST' and user.is_authenticated:
-        like, created = Like.objects.get_or_create(user=user, article=article)
-        
-        if created:
-            liked = True
-        else:
-            like.delete()
-            liked = False
-
-        likes_count = article.likes.count()
-
-        return JsonResponse({'liked': liked, 'likes_count': likes_count})
-
-    return JsonResponse({'error': 'Invalid request'}, status=400)
-
-@login_required
-def bio_edit(request):
-    
-    profile, created = Profile.objects.get_or_create(user=request.user)
-
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
-            return redirect('bio')
-    else:
-        form = ProfileForm(instance=profile)
-
-    return render(request, 'teamapp/bio_edit.html', {'form': form})
-
-def some_view(request):
-    articles = Article.objects.all()
-    for article in articles:
-        article.is_liked_by_student = request.studentid in article.likes.values_list('studentid', flat=True)
-    context = {
-        'articles': articles,
-        'user': request.user,
-        # 他のコンテキスト追加可能
-    }
-    return render(request, 'home_screen.html', context)

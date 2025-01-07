@@ -1,0 +1,12 @@
+button {
+    color: red;
+    background-color: black;
+    font-size: 30px;
+    cursor: pointer;
+    margin: 20px;
+    border: none;
+}
+
+button:hover {
+    background-color: gray;
+}

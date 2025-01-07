@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロフィール編集</title>
+  </head>
+  <body>
+    <h2>プロフィール編集</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      {% for field in form %}
+      <div>
+          {{ field.label_tag }}
+          {{ field }}
+          {{ field.errors }}
+      </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">保存</button>
+    </form>
+    <a href="{% url 'bio' %}">キャンセル</a>
+  </body>
+</html>

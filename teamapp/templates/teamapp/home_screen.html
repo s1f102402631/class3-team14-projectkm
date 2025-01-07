@@ -132,20 +132,24 @@
         <div class="accordion">
           {% if user.is_authenticated %}
             <div class="accordion-bar">
-              <a href="{% url 'logout' %}">
+              <form method="post" action="{% url 'logout' %}">
                 {% csrf_token %}
-                <img src="{% static 'teamapp\images\スクリーンショット 2024-12-24 042329.png' %}" alt="Screenshot" width: 50px; height= 50px;>
-              </a>
+                <button type="submit" style="border: none; background: none; padding: 0; cursor: pointer;">
+                    <img src="{% static 'teamapp/images/スクリーンショット 2024-12-24 042329.png' %}" alt="Logout" width="50" height="50">
+                </button>
+              </form>
             </div>
             <div class="accordion-content">
               ログアウト
             </div>
             {% else %}
             <div class="accordion-bar">
-              <a href="{% url 'login' %}">
+              <form method="post" action="{% url 'login' %}">
                 {% csrf_token %}
-                <img src="{% static 'teamapp\images\スクリーンショット 2024-12-24 042329.png' %}" alt="Screenshot" width: 50px; height= 50px;>
-              </a>
+                <button type="submit" style="border: none; background: none; padding: 0; cursor: pointer;">
+                    <img src="{% static 'teamapp/images/スクリーンショット 2024-12-24 042329.png' %}" alt="Login" width="50" height="50">
+                </button>
+              </form>
             </div>
             <div class="accordion-content">
               ログイン/アカウント作成
@@ -169,7 +173,11 @@
           </div>
       </div>
       <div class="accordion">
-        <div class="accordion-bar">S</div>
+        <div class="accordion-bar">
+          <a href="{% url 'configuration' %}">
+            <img src="{% static 'teamapp\images\スクリーンショット 2025-01-02 210427.png' %}" alt="Configuration" width: 50px; height= 50px;>
+          </a>
+        </div>
         <div class="accordion-content">
             設定 (未完成)
         </div>
@@ -198,7 +206,7 @@
               <h1>検索機能</h1>
               <input type="text" id="serchBox" placeholder="キーワードを入力してください">
               <input type="button" value="検索" onclick="search()">
-              <div class="results" id="results"
+              <div class="results" id="results">
                 <!-- 検索結果がここに表示されます -->
               </div>
               <br>
@@ -215,7 +223,7 @@
                       <h2><a href="{% url 'detail' article.id %}">{{ article.title }}</a></h2>
                       <small>[{{ article.posted_at }}]</small>
                       <div>
-                        <a href="#" onclick="like({{ article.id }});">
+                        <a href="#"onclick="like({{ article.id }});">
                           Like: <span id="like{{ article.id }}">{{ article.like }}</span>
                         </a>
                       </div>
@@ -241,8 +249,9 @@
                 <div class="box3"> </div>
                 <div class="box3"> </div>
               </div>
+            </div>
               <div class="fixed-content">コンテンツ2（広告スペース等）</div>
-        </div>
+        
       </div>
     </div>
   </body>

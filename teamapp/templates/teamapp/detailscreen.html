@@ -9,11 +9,9 @@
     <link rel="stylesheet" href="{% static 'teamapp/detailscreen.css' %}">
   </head>
   <body>
-    <h1>Django Sample Application</h1>
+    <h1></h1>
     <br>
  
-    <p>投稿の表示先は現在ホーム画面
-    </p>
     <br>
     <br>
 
@@ -23,18 +21,19 @@
       <!-- Title と Text をまとめた枠 -->
       <div class="form-wrapper">
         <div>
-          <label for="titleInput">Title</label>
-          <input id="titleInput" name="title" type="text" placeholder="Input title">
+          
+          <label for="titleInput">タイトル</label>
+          <input id="titleInput" name="title" type="text" placeholder="ここに入力">
         </div>
         <div>
-          <label for="textInput">Text</label>
+          <label for="textInput">テキスト</label>
           <textarea id="textInput" name="text" rows="3" placeholder=""></textarea>
         </div>
       </div>
       
       <!-- Submit ボタン -->
       <div class="button-wrapper">
-        <button type="submit">Submit</button>
+        <button type="submit">投稿</button>
       </div>
     </form>
     
