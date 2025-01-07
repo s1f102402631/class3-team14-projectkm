@@ -52,10 +52,10 @@ class Like(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     #studentid = models.CharField(max_length=10)
-    self_info = models.TextField()
-    mbti = models.CharField(max_length=4, validators=[RegexValidator(regex='^[IE][NS][TF][JP]$',message='MBTIは有効な4文字の組み合わせである必要があります',),])
-    hobby = models.CharField(max_length=255)
-    fav = models.CharField(max_length=255)
+    self_info = models.TextField(verbose_name='自己紹介')
+    mbti = models.CharField(verbose_name='MBTI', max_length=4, validators=[RegexValidator(regex='^[IE][NS][TF][JP]$',message='MBTIは有効な4文字の組み合わせである必要があります',),])
+    hobby = models.CharField(verbose_name='趣味、特技', max_length=255)
+    fav = models.CharField(verbose_name='好きなもの、こと', max_length=255)
 
     def __str__(self):
         return self.user.username
