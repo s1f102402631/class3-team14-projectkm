@@ -79,28 +79,28 @@
           event.preventDefault();
           var articleId = $(this).data('article-id');
           var button = $(this);
-
-        $.ajax({
+          $.ajax({
             url: '/article/' + articleId + '/toggle_like/',
             method: 'POST',
             data: {
-                'csrfmiddlewaretoken': '{{ csrf_token }}'
+              'csrfmiddlewaretoken': '{{ csrf_token }}'
             },
             success: function(response){
-                if(response.liked){
-                    button.find('.like-icon').css('color', 'red');
-                } else {
-                    button.find('.like-icon').css('color', 'black');
-                }
-                $('#like_count-' + articleId).text(response.likes_count);
+              if(response.liked){
+                button.find('.like-icon').css('color', 'red');
+              } else {
+                button.find('.like-icon').css('color', 'black');
+              }
+              $('#like_count-' + articleId).text(response.likes_count);
             },
             error: function(xhr, status, error){
-                console.log('Error: ' + error);
+              console.error('Error: ' + error);
             }
+          });
         });
-    });
-});
+      });
     </script>
+
     <h1>Django Sample Application</h1>
     <div style="text-align: center;">
     <img src="{% static 'teamapp/images/img_20241213_161452.jpg' %}" alt="Uploaded Image" width: 500px; height= 500px;>

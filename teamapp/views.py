@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from teamapp.models import CustomUser
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 def index(request):
@@ -159,21 +160,22 @@ def user_create(request):
 
 #@login_required 
 def toggle_like(request, article_id):
-    article = get_object_or_404(Article, id=article_id)
+    article = get_object_or_404(Article, pk=article_id)
     user = request.user
 
-    if request.method == 'POST':
-        if user.is_authenticated:
-            if article.likes.filter(id=user.id).exists():
-                article.likes.remove(user)
-                liked = False
-            else:
-                article.likes.add(user)
-                liked = True
-            likes_count = article.likes.count()
+    if request.method == 'POST' and user.is_authenticated:
+        like, created = Like.objects.get_or_create(user=user, article=article)
+        
+        if created:
+            liked = True
+        else:
+            like.delete()
+            liked = False
 
-            return JsonResponse({'liked': liked, 'likes_count': likes_count})
-    
+        likes_count = article.likes.count()
+
+        return JsonResponse({'liked': liked, 'likes_count': likes_count})
+
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
 @login_required
