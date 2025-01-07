@@ -231,5 +231,5 @@ def configuration_view(request):
         if 'delete_account' in request.POST:
             user = request.user
             user.delete()
-            return redirect('teamapp/home_screen.html')
+            return redirect('login_create')
     return render(request, 'teamapp/configuration.html')
