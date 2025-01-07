@@ -50,7 +50,7 @@ class Like(models.Model):
         return f"{self.user} likes {self.article.title}"
 
 class Profile(models.Model):
-    #user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     #studentid = models.CharField(max_length=10)
     self_info = models.TextField()
     mbti = models.CharField(max_length=4, validators=[RegexValidator(regex='^[IE][NS][TF][JP]$',message='MBTIは有効な4文字の組み合わせである必要があります',),])

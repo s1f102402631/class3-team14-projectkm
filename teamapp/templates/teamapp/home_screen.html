@@ -13,95 +13,6 @@
   </head>
   <body>
     <h1>Django Sample Application</h1>
-    <p>You can submit articles from the following form.</p>
-    <form action="{% url 'index' %}" method="post">
-      {% csrf_token %}
-      <div>
-        <label for="titleInput">Title</label><br>
-        <input id="titleInput" name="title" type="text" placeholder="Input title">
-      </div>
-      <div>
-        <label for="textInput">Text</label><br>
-        <textarea id="textInput" name="text" rows="3"></textarea>
-      </div>
-      <div>
-        <button type="submit">Submit</button>
-      </div>
-    </form>
-    <br>
-    {% if user.is_authenticated %}
-    <a href="{% url 'login' %}?next={{ 'index' }}">ログイン</a>
-    <form method="post" action="{% url 'logout' %}">
-      {% csrf_token %}
-      <button type="submit">ログアウト</button>
-    </form>
-    {% else %}
-    
-    <form method="post" action="{% url 'login' %}">
-      {% csrf_token %}
-      <a href="{% url 'login' %}">ログイン</a>
-      <button type="submit">ログイン</button>
-    </form>
-    {% endif %}
-
-
-    <br>
-    <div>
-      <a href="{% url 'index' %}?sort=data">最新</a>
-      <a href="{% url 'index' %}?sort=like">いいね順</a>
-    </div>
-
-    {% if articles %}
-      {% for article in articles %}
-      <div class="text">
-        <h2><a href="{% url 'detail' article.id %}">{{ article.title}}</a><h2>
-        <small>[{{ article.posted_at }}]</small>
-        <div>
-          <a href="#" class="like-button" data-article-id="{{ article.id }}">
-            <span class="like-icon" style="color: {% if article.is_liked_by_student %}red{% else %}black{% endif %};">♡</span>
-        </a>
-          <span id="like_count-{{ article.id }}">{{ article.likes.count }}</span>
-        </div>
-        <div>
-          {{article.body|linebreaksbr}}
-        </div>
-      </div>
-      {% endfor %}    
-    {% else %}
-    <p>No article.</p>
-    {% endif %}
-        
-      
-    
-    <script>
-      $(document).ready(function(){
-        $('.like-button').click(function(event){
-          event.preventDefault();
-          var articleId = $(this).data('article-id');
-          var button = $(this);
-          $.ajax({
-            url: '/article/' + articleId + '/toggle_like/',
-            method: 'POST',
-            data: {
-              'csrfmiddlewaretoken': '{{ csrf_token }}'
-            },
-            success: function(response){
-              if(response.liked){
-                button.find('.like-icon').css('color', 'red');
-              } else {
-                button.find('.like-icon').css('color', 'black');
-              }
-              $('#like_count-' + articleId).text(response.likes_count);
-            },
-            error: function(xhr, status, error){
-              console.error('Error: ' + error);
-            }
-          });
-        });
-      });
-    </script>
-
-    <h1>Django Sample Application</h1>
     <div style="text-align: center;">
     <img src="{% static 'teamapp/images/img_20241213_161452.jpg' %}" alt="Uploaded Image" width: 500px; height= 500px;>
     </div>
@@ -220,13 +131,55 @@
                   {% for article in articles %}
                   <div class="box2">
                     <div class="text">
-                      <h2><a href="{% url 'detail' article.id %}">{{ article.title }}</a></h2>
-                      <small>[{{ article.posted_at }}]</small>
-                      <div>
-                        <a href="#"onclick="like({{ article.id }});">
-                          Like: <span id="like{{ article.id }}">{{ article.like }}</span>
+                      {% if articles %}
+                      {% for article in articles %}
+                      <div class="text">
+                        <h2><a href="{% url 'detail' article.id %}">{{ article.title}}</a><h2>
+                        <small>[{{ article.posted_at }}]</small>
+                        <div>
+                          <a href="#" class="like-button" data-article-id="{{ article.id }}">
+                            <span class="like-icon" style="color: {% if article.is_liked_by_student %}red{% else %}black{% endif %};">♡</span>
                         </a>
+                          <span id="like_count-{{ article.id }}">{{ article.likes.count }}</span>
+                        </div>
+                        <div>
+                          {{article.body|linebreaksbr}}
+                        </div>
                       </div>
+                      {% endfor %}    
+                    {% else %}
+                    <p>No article.</p>
+                    {% endif %}
+                        
+                      
+                    
+                    <script>
+                      $(document).ready(function(){
+                        $('.like-button').click(function(event){
+                          event.preventDefault();
+                          var articleId = $(this).data('article-id');
+                          var button = $(this);
+                          $.ajax({
+                            url: '/article/' + articleId + '/toggle_like/',
+                            method: 'POST',
+                            data: {
+                              'csrfmiddlewaretoken': '{{ csrf_token }}'
+                            },
+                            success: function(response){
+                              if(response.liked){
+                                button.find('.like-icon').css('color', 'red');
+                              } else {
+                                button.find('.like-icon').css('color', 'black');
+                              }
+                              $('#like_count-' + articleId).text(response.likes_count);
+                            },
+                            error: function(xhr, status, error){
+                              console.error('Error: ' + error);
+                            }
+                          });
+                        });
+                      });
+                    </script>
                       <div>
                         {{ article.body|linebreaksbr }}
                       </div>
