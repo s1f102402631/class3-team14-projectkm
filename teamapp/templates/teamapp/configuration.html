@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="{% static 'teamapp/configuration.css' %}"
 </head>
 <body>
-    <from method="POST" onsubmit="return confirmDelete()">
+    <form method="POST" onsubmit="return confirmDelete()">
         {% csrf_token %}
         <!-- 他の設定項目をここに追加できます -->
         <button type="submit" name="delete_account">アカウントを削除</button>
-    </from>
+    </form>
 
     <script src="{% static 'teamapp/js/configuration.js' %}"></script>
 
