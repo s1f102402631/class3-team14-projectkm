@@ -178,3 +178,58 @@ def user_create(request):
             # ユーザー作成失敗
             messages.error(request, 'アカウントの作成に失敗しました。エラー: {}'.format(str(e)))
     return render(request, 'teamapp/login_create.html')
+
+#@login_required 
+def toggle_like(request, article_id):
+    article = get_object_or_404(Article, pk=article_id)
+    user = request.user
+
+    if request.method == 'POST' and user.is_authenticated:
+        like, created = Like.objects.get_or_create(user=user, article=article)
+        
+        if created:
+            liked = True
+        else:
+            like.delete()
+            liked = False
+
+        likes_count = article.likes.count()
+
+        return JsonResponse({'liked': liked, 'likes_count': likes_count})
+
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+
+@login_required
+def bio_edit(request):
+    
+    profile, created = Profile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('bio')
+    else:
+        form = ProfileForm(instance=profile)
+
+    return render(request, 'teamapp/bio_edit.html', {'form': form})
+
+def some_view(request):
+    articles = Article.objects.all()
+    for article in articles:
+        article.is_liked_by_student = request.studentid in article.likes.values_list('studentid', flat=True)
+    context = {
+        'articles': articles,
+        'user': request.user,
+        # 他のコンテキスト追加可能
+    }
+    return render(request, 'home_screen.html', context)
+
+@login_required
+def configuration_view(request):
+    if request.method == 'POST':
+        if 'delete_account' in request.POST:
+            user = request.user
+            user.delete()
+            return redirect('home_screen')
+    return render(request, 'teamapp/configuration.html')
