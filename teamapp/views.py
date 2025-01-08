@@ -126,6 +126,7 @@ def bio(request):
     except Profile.DoesNotExist:
         return redirect('bio_edit')
 
+@login_required
 def detailscreen(request):
     return render(request, 'teamapp/detailscreen.html')
     
