@@ -244,6 +244,6 @@ def index(request):
     if form.is_valid():
         query = form.cleaned_data.get('query')
         if query:
-            posts = Post.objects.filter(title___icontains=query) | Post.objects.filter(content__icontains=query)
+            posts = Post.objects.filter(title__icontains=query) | Post.objects.filter(content__icontains=query)
     
     return render(request, 'teamapp/home_screen.html', {'form': form, 'posts': posts})
