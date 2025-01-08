@@ -3,14 +3,14 @@ from django.http import HttpResponse
 from django.http import Http404, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from teamapp.models import Article, Comment, Like, Profile
+from teamapp.models import Article, Comment, Like, Profile, Post
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
 from django.contrib.auth.models import User
 from teamapp.models import CustomUser
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from teamapp.forms import ProfileForm
+from teamapp.forms import ProfileForm, PostSearchForm
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
@@ -234,3 +234,14 @@ def configuration_view(request):
             user.delete()
             return redirect('create')
     return render(request, 'teamapp/configuration.html')
+
+def index(request):
+    form = PostSearchForm(request.GET)
+    posts = []
+
+    if form.is_valid():
+        query = form.cleaned_data.get('query')
+        if query:
+            posts = Post.objectsfilter(title___icontains=query) | Post.objects.filter(content__icontains=query)
+    
+    return render(request, 'home_screen.html', {'foem': form, 'posts': posts})
