@@ -8,7 +8,6 @@
     <script type="text/javascript" src="{% static 'teamapp/js/sistem.js' %}" ></script>
     <style type="text/css"></style>
     <link rel="stylesheet" href="{% static 'teamapp/home_screen.css' %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
@@ -137,7 +136,7 @@
                 <a href="{% url 'index' %}?sort=data">最新</a>
                 <a href="{% url 'index' %}?sort=like">いいね順</a>
               </div>
-              <br>
+              </br>
               <div class="box-container">
                 {% if articles %}
                   {% for article in articles %}
