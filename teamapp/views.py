@@ -3,15 +3,17 @@ from django.http import HttpResponse
 from django.http import Http404, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from teamapp.models import Article, Comment, Like, Profile, Post
+from teamapp.models import Article, Comment, Like, Profile
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
 from django.contrib.auth.models import User
 from teamapp.models import CustomUser
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from teamapp.forms import ProfileForm, PostSearchForm
+from teamapp.forms import ProfileForm
 from django.shortcuts import get_object_or_404
+from teamapp.models import Post
+from teamapp.question import PostSearchForm
 
 # Create your views here.
 def index(request):
