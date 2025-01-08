@@ -246,4 +246,4 @@ def index(request):
         if query:
             posts = Post.objectsfilter(title___icontains=query) | Post.objects.filter(content__icontains=query)
     
-    return render(request, 'home_screen.html', {'form': form, 'posts': posts})
+    return render(request, 'teamapp/home_screen.html', {'form': form, 'posts': posts})
