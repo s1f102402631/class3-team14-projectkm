@@ -14,7 +14,8 @@
         {% else %}
             <img src="{% static 'teamapp\images\icon_user_dark.png' %}" alt="デフォルトプロフィール画像" class="profile-image">
         {% endif %}
-        <a href="{% url 'bio_edit' %}" class="edit-button" role="button">編集する</a>        <h2>ユーザー名：{{ username }}</h1>
+        <a href="{% url 'bio_edit' %}" class="edit-button" role="button">編集する</a>
+        <h1>{{ username }}</h1>
         <p>学籍番号：{{ studentid }}</p>
         
         <h2>自己紹介</h2>
