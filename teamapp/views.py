@@ -12,8 +12,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from teamapp.forms import ProfileForm
 from django.shortcuts import get_object_or_404
-from teamapp.models import Post
-from teamapp.question import PostSearchForm
+
 
 # Create your views here.
 def index(request):
