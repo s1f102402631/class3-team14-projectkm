@@ -113,24 +113,12 @@
             </div>
             <div>
             -->
-            <h1>検索機能</h1>
-              <form method="get" action="{% url 'index' %}">
-                {{ form.as_p }}
-                <button type="submit">検索</button>
-              </form>
-              {% if posts %}
-                  <h2>検索結果</h2>
-                  <ul>
-                    {% for post in posts %}
-                      <li>
-                        <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>
-                        <p>{{ post.content | slice:":200" }}...</p>
-                      </li>
-                    {% endfor %}
-                  </ul>
-              {% else %}
-                  <p>検索結果がありません。</p>
-              {% endif %}
+              <h1>検索機能</h1>
+             <input type="text" id="serchBox" placeholder="キーワードを入力してください">
+              <input type="button" value="検索" onclick="search()">
+              <div class="results" id="results">
+                <!-- 検索結果がここに表示されます -->
+              </div>
               <br>
 
               <div>
@@ -138,14 +126,14 @@
                 <a href="{% url 'index' %}?sort=like">いいね順</a>
               </div>
 
-              </br>
+              <br>
 
               <div class="box-container">
                 {% if articles %}              
                   {% for article in articles %}
-                    <div class="box2">
-                      <div class="text">
-                        <h2><a href="{% url 'detail' article.id %}">{{ article.title}}</a><h2>
+                  <div class="box2">
+                    <div class="text">
+                      <h2><a href="{% url 'detail' article.id %}">{{ article.title}}</a><h2>
                         <small>[{{ article.posted_at }}]</small>
                         <div>
                           <a href="#" class="like-button" data-article-id="{{ article.id }}">
@@ -153,18 +141,14 @@
                           </a>
                           <span id="like_count-{{ article.id }}">{{ article.likes.count }}</span>
                         </div>
-                        <div>
-                          {{article.body|linebreaksbr}}
-                        </div>
-                      </div>
-                    </div> 
-                  {% endfor %}
-                {% else %}
-                  <div class="box2">
+                      <div>
+                      {{article.body|linebreaksbr}}
+                    </div>
+                    {% endfor %}
+                  {% else %}
                     <p>No article.</p>
-                  </div>
-                {% endif %}
-
+                  {% endif %}
+                  
                 <script>
                   $(document).ready(function(){
                     $('.like-button').click(function(event){

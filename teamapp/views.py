@@ -12,8 +12,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from teamapp.forms import ProfileForm
 from django.shortcuts import get_object_or_404
-from teamapp.models import Post
-from teamapp.question import PostSearchForm
+
 
 # Create your views here.
 def index(request):
@@ -236,14 +235,3 @@ def configuration_view(request):
             user.delete()
             return redirect('create')
     return render(request, 'teamapp/configuration.html')
-
-def index(request):
-    form = PostSearchForm(request.GET)
-    posts = []
-
-    if form.is_valid():
-        query = form.cleaned_data.get('query')
-        if query:
-            posts = Post.objects.filter(title__icontains=query) | Post.objects.filter(content__icontains=query)
-    
-    return render(request, 'teamapp/home_screen.html', {'form': form, 'posts': posts})
