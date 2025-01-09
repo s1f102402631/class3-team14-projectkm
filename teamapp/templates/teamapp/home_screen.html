@@ -18,7 +18,7 @@
     
         
     <div class="app">
-      <div class="header"><h2>INIAD Board</h2></div>
+      <div class="header"><h2>TalkIN</h2></div>
       <div class="main">
         <div class="sidebar"> 
                 <!--
@@ -113,12 +113,12 @@
             </div>
             <div>
             -->
-             <h1>検索機能</h1>
+              <h1>検索機能</h1>
              <input type="text" id="serchBox" placeholder="キーワードを入力してください">
-             <input type="button" value="検索" onclick="search()">
-             <div class="results" id="results">
-               <!-- 検索結果がここに表示されます -->
-             </div>
+              <input type="button" value="検索" onclick="search()">
+              <div class="results" id="results">
+                <!-- 検索結果がここに表示されます -->
+              </div>
               <br>
 
               <div>
@@ -126,14 +126,14 @@
                 <a href="{% url 'index' %}?sort=like">いいね順</a>
               </div>
 
-              </br>
+              <br>
 
               <div class="box-container">
                 {% if articles %}              
                   {% for article in articles %}
-                    <div class="box2">
-                      <div class="text">
-                        <h2><a href="{% url 'detail' article.id %}">{{ article.title}}</a><h2>
+                  <div class="box2">
+                    <div class="text">
+                      <h2><a href="{% url 'detail' article.id %}">{{ article.title}}</a><h2>
                         <small>[{{ article.posted_at }}]</small>
                         <div>
                           <a href="#" class="like-button" data-article-id="{{ article.id }}">
@@ -142,17 +142,13 @@
                           <span id="like_count-{{ article.id }}">{{ article.likes.count }}</span>
                         </div>
                       <div>
-                        {{article.body|linebreaksbr}}
-                      </div>
+                      {{article.body|linebreaksbr}}
                     </div>
-                  {% endfor %}
-                {% else %}
-                  <div class="box2">
+                    {% endfor %}
+                  {% else %}
                     <p>No article.</p>
-                  </div>
-                {% endif %}
-
-              
+                  {% endif %}
+                  
                 <script>
                   $(document).ready(function(){
                     $('.like-button').click(function(event){
@@ -185,10 +181,10 @@
                 <div class="box2"> </div>
               </div>
               <div class="box-container">
-                <div class="box3">（ポスト内容掲示）</div>
+                <div class="box3"></div>
                 <div class="box3"> </div>
                 <div class="box3"> </div>
-                <div class="box3"> </div>
+                <div class="box3">:</div>
               </div>
             </div>
             <div class="fixed-content">.</div>
