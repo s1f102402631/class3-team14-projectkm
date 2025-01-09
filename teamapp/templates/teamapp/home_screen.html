@@ -52,7 +52,7 @@
             <div class="accordion-content">
               ログアウト
             </div>
-            {% else %}
+          {% else %}
             <div class="accordion-bar">
               <form method="post" action="{% url 'login' %}">
                 {% csrf_token %}
@@ -64,7 +64,7 @@
             <div class="accordion-content">
               ログイン/アカウント作成
             </div>
-            {% endif %}
+          {% endif %}
         </div>
         <div class="accordion">
           <div class="accordion-bar">
@@ -132,29 +132,35 @@
                   <p>検索結果がありません。</p>
               {% endif %}
               <br>
+
               <div>
                 <a href="{% url 'index' %}?sort=data">最新</a>
                 <a href="{% url 'index' %}?sort=like">いいね順</a>
               </div>
+
               </br>
+
               <div class="box-container">
                 {% if articles %}
                   {% for article in articles %}
-                  <div class="box2">
-                    <div class="text">
-                      <h2><a href="{% url 'detail' article.id %}">{{ article.title }}</a></h2>
-                      <small>[{{ article.posted_at }}]</small>
-                      <div>
-                        <a href="#" class="like-button" data-article-id="{{ article.id }}">
-                          <span class="like-icon" style="color: {% if article.is_liked_by_student %}red{% else %}black{% endif %};">♡</span>
-                        </a>
-                        <span id="like_count-{{ article.id }}">{{ article.likes.count }}</span>
-                      </div>
-                      <div>
-                        {{ article.body|linebreaksbr }}
+                    <div class="box2">
+                      <div class="text">
+                        {% if articles %}
+                          {% for article in articles %}
+                      <div class="text">
+                        <h2><a href="{% url 'detail' article.id %}">{{ article.title}}</a><h2>
+                        <small>[{{ article.posted_at }}]</small>
+                        <div>
+                          <a href="#" class="like-button" data-article-id="{{ article.id }}">
+                            <span class="like-icon" style="color: {% if article.is_liked_by_student %}red{% else %}black{% endif %};">♡</span>
+                          </a>
+                          <span id="like_count-{{ article.id }}">{{ article.likes.count }}</span>
+                        </div>
+                        <div>
+                          {{article.body|linebreaksbr}}
+                        </div>
                       </div>
                     </div>
-                  </div>
                   {% endfor %}
                 {% else %}
                   <div class="box2">
@@ -163,44 +169,44 @@
                 {% endif %}
               </div>
 
-                    <script>
-                      $(document).ready(function(){
-                        $('.like-button').click(function(event){
-                          event.preventDefault();
-                          var articleId = $(this).data('article-id');
-                          var button = $(this);
-                          $.ajax({
-                            url: '/article/' + articleId + '/toggle_like/',
-                            method: 'POST',
-                            data: {
-                              'csrfmiddlewaretoken': '{{ csrf_token }}'
-                            },
-                            success: function(response){
-                              if(response.liked){
-                                button.find('.like-icon').css('color', 'red');
-                              } else {
-                                button.find('.like-icon').css('color', 'black');
-                              }
-                              $('#like_count-' + articleId).text(response.likes_count);
-                            },
-                            error: function(xhr, status, error){
-                              console.error('Error: ' + error);
-                            }
-                          });
-                        });
-                      });
-                    </script>
-                      <div>
-                        {{ article.body|linebreaksbr }}
-                      </div>
-                    </div>
-                  </div>
-                  {% endfor %}
-                {% else %}
-                  <div class="box2">
-                    <p>No article.</p>
-                  </div>
-                {% endif %}
+              <script>
+                $(document).ready(function(){
+                  $('.like-button').click(function(event){
+                    event.preventDefault();
+                    var articleId = $(this).data('article-id');
+                    var button = $(this);
+                    $.ajax({
+                      url: '/article/' + articleId + '/toggle_like/',
+                      method: 'POST',
+                      data: {
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                      },
+                      success: function(response){
+                        if(response.liked){
+                          button.find('.like-icon').css('color', 'red');
+                        } else {
+                          button.find('.like-icon').css('color', 'black');
+                        }
+                        $('#like_count-' + articleId).text(response.likes_count);
+                      },
+                      error: function(xhr, status, error){
+                        console.error('Error: ' + error);
+                      }
+                    });
+                  });
+                });
+              </script>
+                <div>
+                  {{ article.body|linebreaksbr }}
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          {% else %}
+            <div class="box2">
+              <p>No article.</p>
+            </div>
+          {% endif %}
                 
                 <!-- 以下はその他のボックスが続く -->
                 <div class="box2"> </div>
