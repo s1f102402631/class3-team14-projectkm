@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 from django.core.validators import RegexValidator
 from django.contrib.auth.validators import UnicodeUsernameValidator
+from django.contrib.auth.models import User
 
 class CustomUser(AbstractUser):
     username_validator = UnicodeUsernameValidator()
@@ -59,3 +60,16 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+class Notification(models.Model):
+    NOTIFY_TYPES = (
+        ('like', 'Like'),
+        ('comment', 'Comment'),
+    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
+    notification_type = models.CharField(max_length=10, choices=NOTIFY_TYPES)
+    message = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    read = models.BooleanField(default=False)
+    def __str__(self):
+        return f"{self.user.username} - {self.notification_type}"

@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>設定画面</title>
+    <link rel="stylesheet" href="{% static 'teamapp/notifications.css' %}"
+</head>
+<body>
+    {% block content %}
+      <h2>Notifications</h2>
+      <ul>
+          {% for notification in notifications %}
+              <li>
+                  <strong>{{ notification.message }}</strong>
+                  <br>
+                  <small>{{ notification.created_at }}</small>
+                  {% if not notification.read %}
+                      <span class="unread">New</span>
+                  {% endif %}
+              </li>
+          {% endfor %}
+      </ul>
+    {% endblock %}
+</body>
+</html>

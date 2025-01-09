@@ -22,4 +22,6 @@ urlpatterns = [
     path("logout/", LogoutView.as_view(next_page='index'), name="logout"),
     path('bio/edit', views.bio_edit, name='bio_edit'),
     path('configuration', views.configuration_view, name='configuration'),
+    path('notifications/, views.notification_list, name='notification_list'),
+    path('notifications/<int:notification_id>/read/', views.mark_as_read, name='mark_as_read'),
 ]

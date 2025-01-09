@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.http import Http404, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from teamapp.models import Article, Comment, Like, Profile
+from teamapp.models import Article, Comment, Like, Profile, Notification
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -235,3 +235,31 @@ def configuration_view(request):
             user.delete()
             return redirect('create')
     return render(request, 'teamapp/configuration.html')
+
+def create_comment_notification(user, post, comment):
+    message = f"{user.username} commented on your post."
+    Notification.objects.create(user=post.user, notification_type='comment', message=message)
+
+def create_like_notification(user, post):
+    message = f"{user.username} liked your post."
+    Notification.objects.create(user=post.user, notification_type='like', message=message)
+
+def post_comment(request, post_id):
+    post = Post.objects.get(id=post_id)
+    user = request.user
+    comment_content = request.POST.get('comment')
+    comment = Comment.objects.create(post=post, user=user, content=comment_content)
+    create_comment_notification(user, post, comment)
+    return HttpResponse('Comment posted successfully!')
+
+def notification_list(request):
+    user = request.user
+    notifications = Notification.objects.filter(user=user).order_by('-created_at')
+    return render(request, 'notifications.html', {'notifications': notifications})
+
+from django.shortcuts import get_object_or_404
+def mark_as_read(request, notification_id):
+    notification = get_object_or_404(Notification, id=notification_id, user=request.user)
+    notification.read = True
+    notification.save()
+    return redirect('notifications')
