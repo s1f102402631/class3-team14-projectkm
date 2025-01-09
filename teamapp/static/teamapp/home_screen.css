@@ -14,8 +14,10 @@
     height: 48px;
     background-color: lightcyan;
     box-sizing: border-box;
-    /*border: 8px solid blue;*/
-  }
+    display: flex; /* フレックスボックスを適用 */
+    justify-content: center; /* 横方向に中央揃え */
+    padding: 0 20px; /* 両端にスペース */
+}
   
   .main {
     display: flex;
