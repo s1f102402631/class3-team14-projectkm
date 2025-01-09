@@ -236,14 +236,3 @@ def configuration_view(request):
             user.delete()
             return redirect('create')
     return render(request, 'teamapp/configuration.html')
-
-def index(request):
-    form = PostSearchForm(request.GET)
-    posts = []
-
-    if form.is_valid():
-        query = form.cleaned_data.get('query')
-        if query:
-            posts = Post.objects.filter(title__icontains=query) | Post.objects.filter(content__icontains=query)
-    
-    return render(request, 'teamapp/home_screen.html', {'form': form, 'posts': posts})
