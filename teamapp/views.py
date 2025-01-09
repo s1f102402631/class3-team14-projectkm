@@ -11,7 +11,6 @@ from teamapp.models import CustomUser
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from teamapp.forms import ProfileForm
-from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -236,20 +235,20 @@ def configuration_view(request):
             return redirect('create')
     return render(request, 'teamapp/configuration.html')
 
-def create_comment_notification(user, post, comment):
-    message = f"{user.username} commented on your post."
-    Notification.objects.create(user=post.user, notification_type='comment', message=message)
+def create_comment_notification(user, article, comment):
+    message = f"{user.username} commented on your article."
+    Notification.objects.create(user=article.user, notification_type='comment', message=message)
 
 def create_like_notification(user, post):
     message = f"{user.username} liked your post."
     Notification.objects.create(user=post.user, notification_type='like', message=message)
 
-def post_comment(request, post_id):
-    post = Post.objects.get(id=post_id)
+def post_comment(request, article_id):
+    article = article.objects.get(id=article_id)
     user = request.user
     comment_content = request.POST.get('comment')
-    comment = Comment.objects.create(post=post, user=user, content=comment_content)
-    create_comment_notification(user, post, comment)
+    comment = Comment.objects.create(article=article, user=user, content=comment_content)
+    create_comment_notification(user, article, comment)
     return HttpResponse('Comment posted successfully!')
 
 def notification_list(request):
