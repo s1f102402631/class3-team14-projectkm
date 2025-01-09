@@ -256,7 +256,6 @@ def notification_list(request):
     notifications = Notification.objects.filter(user=user).order_by('-created_at')
     return render(request, 'teamapp/notifications.html', {'notifications': notifications})
 
-from django.shortcuts import get_object_or_404
 def mark_as_read(request, notification_id):
     notification = get_object_or_404(Notification, id=notification_id, user=request.user)
     notification.read = True
