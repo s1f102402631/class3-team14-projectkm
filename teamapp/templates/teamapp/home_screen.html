@@ -141,12 +141,9 @@
               </br>
 
               <div class="box-container">
-                {% if articles %}
+                {% if articles %}              
                   {% for article in articles %}
                     <div class="box2">
-                      <div class="text">
-                        {% if articles %}
-                          {% for article in articles %}
                       <div class="text">
                         <h2><a href="{% url 'detail' article.id %}">{{ article.title}}</a><h2>
                         <small>[{{ article.posted_at }}]</small>
@@ -160,53 +157,41 @@
                           {{article.body|linebreaksbr}}
                         </div>
                       </div>
-                    </div>
+                    </div> 
                   {% endfor %}
                 {% else %}
                   <div class="box2">
                     <p>No article.</p>
                   </div>
                 {% endif %}
-              </div>
 
-              <script>
-                $(document).ready(function(){
-                  $('.like-button').click(function(event){
-                    event.preventDefault();
-                    var articleId = $(this).data('article-id');
-                    var button = $(this);
-                    $.ajax({
-                      url: '/article/' + articleId + '/toggle_like/',
-                      method: 'POST',
-                      data: {
-                        'csrfmiddlewaretoken': '{{ csrf_token }}'
-                      },
-                      success: function(response){
-                        if(response.liked){
-                          button.find('.like-icon').css('color', 'red');
-                        } else {
-                          button.find('.like-icon').css('color', 'black');
+                <script>
+                  $(document).ready(function(){
+                    $('.like-button').click(function(event){
+                      event.preventDefault();
+                      var articleId = $(this).data('article-id');
+                      var button = $(this);
+                      $.ajax({
+                        url: '/article/' + articleId + '/toggle_like/',
+                        method: 'POST',
+                        data: {
+                          'csrfmiddlewaretoken': '{{ csrf_token }}'
+                        },
+                        success: function(response){
+                          if(response.liked){
+                            button.find('.like-icon').css('color', 'red');
+                          } else {
+                            button.find('.like-icon').css('color', 'black');
+                          }
+                          $('#like_count-' + articleId).text(response.likes_count);
+                        },
+                        error: function(xhr, status, error){
+                          console.error('Error: ' + error);
                         }
-                        $('#like_count-' + articleId).text(response.likes_count);
-                      },
-                      error: function(xhr, status, error){
-                        console.error('Error: ' + error);
-                      }
-                    });
+                      });
+                   });
                   });
-                });
-              </script>
-                <div>
-                  {{ article.body|linebreaksbr }}
-                </div>
-              </div>
-            </div>
-            {% endfor %}
-          {% else %}
-            <div class="box2">
-              <p>No article.</p>
-            </div>
-          {% endif %}
+                </script>
                 
                 <!-- 以下はその他のボックスが続く -->
                 <div class="box2"> </div>
