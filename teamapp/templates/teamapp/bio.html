@@ -9,9 +9,12 @@
 </head>
 <body>
     <div class="profile-container">
-        <img src="/api/placeholder/200/200" alt="プロフィール画像" class="profile-image">
-        <a href="{% url 'bio_edit' %}">編集する</a>
-        <h2>ユーザー名：{{ username }}</h1>
+        {% if profile.profile_image %}
+            <img src="{{ profile.profile_image.url }}" alt="プロフィール画像" class="profile-image">
+        {% else %}
+            <img src="{% static 'teamapp\images\icon_user_dark.png' %}" alt="デフォルトプロフィール画像" class="profile-image">
+        {% endif %}
+        <a href="{% url 'bio_edit' %}" class="edit-button" role="button">編集する</a>        <h2>ユーザー名：{{ username }}</h1>
         <p>学籍番号：{{ studentid }}</p>
         
         <h2>自己紹介</h2>

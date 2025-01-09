@@ -6,6 +6,7 @@ body {
     line-height: 1.6;
     background-color: #f4f4f4;
 }
+
 .profile-container {
     background-color: white;
     border-radius: 10px;
@@ -18,8 +19,9 @@ body {
     height: 200px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 20px;
+    margin: 0 auto 20px;
     filter: grayscale(100%);
+    display: block;
 }
 .interests {
     display: flex;
@@ -35,4 +37,37 @@ body {
 }
 .anonymized {
     color: #666;
+}
+.profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 20px;
+    filter: grayscale(100%);
+    display: block;
+}
+.edit-button {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-decoration: none;
+}
+.edit-button:hover {
+    background-color: #357abd;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.edit-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
