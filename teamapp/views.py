@@ -255,7 +255,7 @@ def post_comment(request, post_id):
 def notification_list(request):
     user = request.user
     notifications = Notification.objects.filter(user=user).order_by('-created_at')
-    return render(request, 'notifications.html', {'notifications': notifications})
+    return render(request, 'teamapp/notifications.html', {'notifications': notifications})
 
 from django.shortcuts import get_object_or_404
 def mark_as_read(request, notification_id):
