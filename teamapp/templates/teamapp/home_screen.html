@@ -144,11 +144,11 @@
                       <div>
                       {{article.body|linebreaksbr}}
                     </div>
-                    {% endfor %}
-                  {% else %}
-                    <p>No article.</p>
-                  {% endif %}
-                  
+                  {% endfor %}
+                {% else %}
+                  <p>No article.</p>
+                {% endif %}
+
                 <script>
                   $(document).ready(function(){
                     $('.like-button').click(function(event){
