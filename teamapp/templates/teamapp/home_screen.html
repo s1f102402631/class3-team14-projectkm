@@ -139,28 +139,29 @@
               </br>
               <div class="box-container">
                 {% if articles %}
-                {% for article in articles %}
-                <div class="box2">
-                  <div class="text">
-                    {% if articles %}
-                    {% for article in articles %}
+                  {% for article in articles %}
+                  <div class="box2">
                     <div class="text">
-                      <h2><a href="{% url 'detail' article.id %}">{{ article.title}}</a><h2>
+                      <h2><a href="{% url 'detail' article.id %}">{{ article.title }}</a></h2>
                       <small>[{{ article.posted_at }}]</small>
-                  <div>
-                    <a href="#" class="like-button" data-article-id="{{ article.id }}">
-                      <span class="like-icon" style="color: {% if article.is_liked_by_student %}red{% else %}black{% endif %};">♡</span>
-                  </a>
-                    <span id="like_count-{{ article.id }}">{{ article.likes.count }}</span>
+                      <div>
+                        <a href="#" class="like-button" data-article-id="{{ article.id }}">
+                          <span class="like-icon" style="color: {% if article.is_liked_by_student %}red{% else %}black{% endif %};">♡</span>
+                        </a>
+                        <span id="like_count-{{ article.id }}">{{ article.likes.count }}</span>
+                      </div>
+                      <div>
+                        {{ article.body|linebreaksbr }}
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    {{article.body|linebreaksbr}}
-                  </div>
-                </div>
-                {% endfor %}
+                  {% endfor %}
                 {% else %}
-                <p>No article.</p>
+                  <div class="box2">
+                    <p>No article.</p>
+                  </div>
                 {% endif %}
+              </div>
 
                     <script>
                       $(document).ready(function(){
