@@ -66,10 +66,11 @@ class Notification(models.Model):
         ('like', 'Like'),
         ('comment', 'Comment'),
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='notifications')
     notification_type = models.CharField(max_length=10, choices=NOTIFY_TYPES)
     message = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     read = models.BooleanField(default=False)
+    
     def __str__(self):
         return f"{self.user.username} - {self.notification_type}"
