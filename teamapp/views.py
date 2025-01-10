@@ -251,6 +251,7 @@ def post_comment(request, article_id):
     create_comment_notification(user, article, comment)
     return HttpResponse('Comment posted successfully!')
 
+@login_required
 def notification_list(request):
     user = request.user
     notifications = Notification.objects.filter(user=user).order_by('-created_at')

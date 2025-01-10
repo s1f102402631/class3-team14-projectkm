@@ -18,6 +18,16 @@
     justify-content: center; /* 横方向に中央揃え */
     padding: 0 20px; /* 両端にスペース */
 }
+.header-logo {
+  width: 150px; 
+  margin-right: auto; 
+}
+
+.header-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;}
   
   .main {
     display: flex;

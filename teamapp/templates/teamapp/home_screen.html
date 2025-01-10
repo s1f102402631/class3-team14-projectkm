@@ -19,7 +19,16 @@
     
         
     <div class="app">
-      <div class="header"><h2>TalkIN(ローカルのほう)</h2></div>
+      <div class="header">
+        <svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" class="header-logo">
+          <path d="M60 20 h180 a20 20 0 0 1 20 20 v20 a20 20 0 0 1 -20 20 h-140 l-20 20 l-20 -20 v-40 a20 20 0 0 1 20 -20 z" 
+                fill="#4A90E2" />
+          <text x="160" y="65" font-family="Arial" font-weight="bold" font-size="40" fill="white" text-anchor="middle">
+            Talk<tspan fill="#FFD700">IN</tspan>
+          </text>
+        </svg>
+        <h1 class="header-title">TalkIN</h1>
+      </div>
       <div class="main">
         <div class="sidebar"> 
                 <!--
@@ -121,6 +130,7 @@
             <h1>検索機能</h1>
               <form method="get" action="{% url 'index' %}">
                 {{ form.as_p }}
+                <input type="text" id="searchBox" placeholder="キーワードを入力してください">
                 <button type="submit">検索</button>
               </form>
               {% if posts %}
