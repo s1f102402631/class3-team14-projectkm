@@ -22,7 +22,7 @@ def index(request):
 
     if ('sort' in request.GET):
         if request.GET['sort'] == 'like':
-            articles = Article.objects.order_by('-like')
+            articles = Article.objects.order_by('-likes')
         else:
             articles = Article.objects.order_by('-posted_at')
     else:
@@ -41,7 +41,7 @@ def detailscreen(request):
 
     if ('sort' in request.GET):
         if request.GET['sort'] == 'like':
-            articles = Article.objects.order_by('-like')
+            articles = Article.objects.order_by('-likes')
         else:
             articles = Article.objects.order_by('-posted_at')
     else:
